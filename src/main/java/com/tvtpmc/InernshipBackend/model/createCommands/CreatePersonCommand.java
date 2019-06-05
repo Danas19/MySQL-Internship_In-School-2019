@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.tvtpmc.InernshipBackend.model.Document;
 import com.tvtpmc.InernshipBackend.model.User;
+import com.tvtpmc.InernshipBackend.model.UserGroup;
 
 public class CreatePersonCommand {
 	private Set<Document> myDocuments = new HashSet<Document>();
@@ -13,4 +14,5 @@ public class CreatePersonCommand {
 	private String lastName;
 	private Long adminId;
 	private User userId;
+	private UserGroup userGroup;
 }
