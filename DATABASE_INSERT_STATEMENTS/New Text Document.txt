@@ -1,0 +1,4 @@
+insert into person(first_name, last_name) values("Kazys", "Boruta");
+insert into person(first_name, last_name) values("Petras", "Petraitis");
+insert into person(first_name, last_name) values("Jonas", "Jonaitis");
+insert into person(first_name, last_name) values("Mantas", "Zymantas");
