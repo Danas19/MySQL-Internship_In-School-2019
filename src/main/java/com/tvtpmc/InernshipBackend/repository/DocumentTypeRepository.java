@@ -1,5 +1,9 @@
 package com.tvtpmc.InernshipBackend.repository;
 
-public class DocumentTypeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tvtpmc.InernshipBackend.model.DocumentType;
+
+public interface DocumentTypeRepository extends JpaRepository<DocumentType, Long> {
 
 }
