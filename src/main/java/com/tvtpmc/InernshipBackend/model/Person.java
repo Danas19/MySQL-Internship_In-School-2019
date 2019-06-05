@@ -19,4 +19,6 @@ public class Person {
 	private Set<Document> myDocuments = new HashSet<Document>();
 	@OneToMany(mappedBy = "accepter", cascade = CascadeType.ALL)
 	private Set<Document> acceptedDocuments = new HashSet<Document>();
+	private String firstName;
+	private String lastName;
 }
