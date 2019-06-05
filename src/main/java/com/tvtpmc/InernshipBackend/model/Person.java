@@ -1,0 +1,22 @@
+package com.tvtpmc.InernshipBackend.model;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Person {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+	private Set<Document> myDocuments = new HashSet<Document>();
+	@OneToMany(mappedBy = "accepter", cascade = CascadeType.ALL)
+	private Set<Document> acceptedDocuments = new HashSet<Document>();
+}
