@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person {
@@ -21,4 +22,8 @@ public class Person {
 	private Set<Document> acceptedDocuments = new HashSet<Document>();
 	private String firstName;
 	private String lastName;
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+	private Admin admin;
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+	private User user;
 }
