@@ -26,6 +26,7 @@ public class Document {
 	@ManyToOne
 	@JoinColumn(name = "author_id")
 	private Person author;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "document_type_id")
 	private DocumentType documentType;
