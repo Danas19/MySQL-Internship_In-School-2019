@@ -62,7 +62,7 @@ public class InternshipBackendController {
 					HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/admin/{adminId}")
+	@GetMapping("/admins/{adminId}")
 	public ResponseEntity<Admin> getAdmin(@PathVariable Long adminId) {
 		return ResponseEntity.ok().body(this.service.getAdmin(adminId));
 	}
