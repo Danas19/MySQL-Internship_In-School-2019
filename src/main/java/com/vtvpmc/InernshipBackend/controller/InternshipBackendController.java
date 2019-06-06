@@ -52,5 +52,7 @@ public class InternshipBackendController {
 				@PathVariable Long authorId) {
 		return new ResponseEntity<Document>(this.service.addDocument(createDocumentCommand, authorId), HttpStatus.CREATED);
 	}
+	
+	
 }
 
