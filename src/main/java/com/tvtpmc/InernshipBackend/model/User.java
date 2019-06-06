@@ -23,4 +23,22 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "user_group_id")
 	private UserGroup userGroup;
+	
+	public Person getPerson() {
+		return person;
+	}
+	
+	public UserGroup getUserGroup() {
+		return userGroup;
+	}
+	
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	public void setUserGroup(UserGroup userGroup) {
+		this.userGroup = userGroup;
+	}
+	
+	
 }
