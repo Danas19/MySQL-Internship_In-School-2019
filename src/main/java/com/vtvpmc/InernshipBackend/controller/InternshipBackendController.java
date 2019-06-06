@@ -66,5 +66,25 @@ public class InternshipBackendController {
 	public ResponseEntity<Admin> getAdmin(@PathVariable Long adminId) {
 		return ResponseEntity.ok().body(this.service.getAdmin(adminId));
 	}
+	
+	@GetMapping("/users/{userId}")
+	public ResponseEntity<User> getUser(@PathVariable Long userId) {
+		return ResponseEntity.ok().body(this.service.getUser(userId));
+	}
+	
+	@GetMapping("/documents/{documentId}")
+	public ResponseEntity<Document> getDocument(@PathVariable Long documentId) {
+		return ResponseEntity.ok().body(this.service.getDocument(documentId));
+	}
+	
+	@GetMapping("/documentTypes/{documentTypeId}")
+	public ResponseEntity<DocumentType> getdocumentType(@PathVariable Long documentTypeId) {
+		return ResponseEntity.ok().body(this.service.getDocumentType(documentTypeId));
+	}
+	
+	@GetMapping("/userGroups/{userGroupId}")
+	public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long userGroupId) {
+		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
+	}
 }
 
