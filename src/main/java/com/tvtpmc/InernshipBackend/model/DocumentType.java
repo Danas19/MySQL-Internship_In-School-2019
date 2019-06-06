@@ -22,4 +22,24 @@ public class DocumentType {
 	public DocumentType() {
 		documents = new HashSet<>();
 	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
+	}
+	
+	public void addDocument(Document document) {
+		this.documents.add(document);
+	}
 }

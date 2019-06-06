@@ -18,4 +18,13 @@ public class Admin {
 	@OneToOne
 	@JoinColumn(name = "person_id")
 	private Person person;
+	
+	public Person getPerson() {
+		return person;
+	}
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	
 }
