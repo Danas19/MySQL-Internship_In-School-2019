@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
+import com.vtvpmc.InernshipBackend.model.DocumentType;
 import com.vtvpmc.InernshipBackend.model.Person;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentTypeCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.repository.AdminRepository;
@@ -42,11 +44,17 @@ public class InternshipService {
 	}
 
 
-	public Document addDocument(CreateDocumentCommand createDocumentCommand, Long authorId) {
+	public Document addDocument(CreateDocumentCommand createDocumentCommand, 
+					Long documentTypeId, Long authorId) {
 		Document newDocument = new Document();
-		newDocument.setAuthor(personRepository.findById(authorId).orElse(null));
 		
-		newDocument.setDocumentType(documentTypeRepository.findById(createDocumentCommand.getDocumentTypeId()).orElse(null));
+		newDocument.setDocumentType(documentTypeRepository.findById(documentTypeId).orElse(null));
+		documentTypeRepository.findById(documentTypeId).orElse(null).addDocument(newDocument);
+		
+		newDocument.setAuthor(personRepository.findById(authorId).orElse(null));
+		personRepository.findById(authorId).orElse(null).addMyDocument(newDocument);
+		
+		
 		newDocument.setTitle(createDocumentCommand.getTitle());
 		newDocument.setDescription(createDocumentCommand.getDescription());
 		
@@ -89,5 +97,12 @@ public class InternshipService {
 		
 		personRepository.save(newPerson);
 		return adminRepository.save(newAdmin);
+	}
+	
+	public DocumentType addDocumentType(CreateDocumentTypeCommand createDocumentTypeCommand) {
+		DocumentType newDocumentType = new DocumentType();
+		newDocumentType.setTypeName(createDocumentTypeCommand.getTypeName());
+		
+		return documentTypeRepository.save(newDocumentType);
 	}
 }

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
+import com.vtvpmc.InernshipBackend.model.DocumentType;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentTypeCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.service.InternshipService;
@@ -47,12 +49,17 @@ public class InternshipBackendController {
 		return new ResponseEntity<Admin>(this.service.addAdmin(createAdminCommand), HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/documents/{authorId}")
-	public ResponseEntity<Document> addDocument(@RequestBody @Valid CreateDocumentCommand createDocumentCommand,
-				@PathVariable Long authorId) {
-		return new ResponseEntity<Document>(this.service.addDocument(createDocumentCommand, authorId), HttpStatus.CREATED);
+	@PostMapping("/documentTypes")
+	public ResponseEntity<DocumentType> addDocumentType(@RequestBody @Valid CreateDocumentTypeCommand createDocumentTypeCommand) {
+		return new ResponseEntity<DocumentType>(this.service.addDocumentType(createDocumentTypeCommand), HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/documents/{documentTypeId}/{authorId}")
+	public ResponseEntity<Document> addDocument(@RequestBody @Valid CreateDocumentCommand createDocumentCommand,
+				@PathVariable Long documentTypeId, @PathVariable Long authorId) {
+		return new ResponseEntity<Document>(this.service.addDocument(createDocumentCommand, documentTypeId, authorId),
+					HttpStatus.CREATED);
+	}
 	
 }
 

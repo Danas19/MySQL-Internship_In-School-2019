@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.Length;
 
 public class CreateDocumentCommand {
 	@NotNull
-	private Long documentTypeId;
-	@NotNull
 	private String title;
 	@NotNull
 	@Length(min = 1, max = 255)
@@ -21,10 +19,6 @@ public class CreateDocumentCommand {
 	private Long accepterId;
 	private String declinationReason;
 	private Blob file;
-	
-	public Long getDocumentTypeId() {
-		return documentTypeId;
-	}
 	
 	public String getTitle() {
 		return title;
