@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.Person;
 import com.vtvpmc.InernshipBackend.model.User;
+import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.repository.AdminRepository;
 import com.vtvpmc.InernshipBackend.repository.DocumentRepository;
 import com.vtvpmc.InernshipBackend.repository.DocumentTypeRepository;
@@ -64,6 +66,14 @@ public class InternshipService {
 		
 		newUser.setPerson(newPerson);
 		
-		return newUser;
+		personRepository.save(newPerson);
+		return userRepository.save(newUser);
+	}
+	
+	public UserGroup addUserGroup(CreateUserGroupCommand createUserGroupCommand) {
+		UserGroup newUserGroup = new UserGroup();
+		newUserGroup.setUserGroupName(createUserGroupCommand.getUserGroupName());
+		
+		return userGroupRepository.save(newUserGroup);
 	}
 }

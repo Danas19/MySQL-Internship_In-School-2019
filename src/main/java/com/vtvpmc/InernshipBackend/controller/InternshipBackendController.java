@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.User;
+import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.service.InternshipService;
 
 
@@ -26,6 +28,11 @@ import com.vtvpmc.InernshipBackend.service.InternshipService;
 public class InternshipBackendController {
 	@Autowired
 	private InternshipService service;
+	
+	@PostMapping("/userGroups")
+	public ResponseEntity<UserGroup> addUserGroup(@RequestBody @Valid CreateUserGroupCommand createUserGroupCommand) {
+		return new ResponseEntity<UserGroup>(this.service.addUserGroup(createUserGroupCommand), HttpStatus.CREATED);
+	}
 	
 	@PostMapping("/userGroups/{userGroupId}/users")
 	public ResponseEntity<User> addUser(@RequestBody @Valid CreateUserCommand createUserCommand,
