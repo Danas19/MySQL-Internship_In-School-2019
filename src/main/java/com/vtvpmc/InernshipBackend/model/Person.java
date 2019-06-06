@@ -31,6 +31,11 @@ public class Person {
 		myDocuments = new HashSet<Document>();
 		myAcceptedDocuments = new HashSet<Document>();
 	}
+	
+	public Person(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public Set<Document> getMyDocuments() {
 		return myDocuments;

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
@@ -38,6 +40,11 @@ public class InternshipBackendController {
 	public ResponseEntity<User> addUser(@RequestBody @Valid CreateUserCommand createUserCommand,
 				@PathVariable Long userGroupId) {
 		return new ResponseEntity<User>(this.service.addUser(createUserCommand, userGroupId), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/admins")
+	public ResponseEntity<Admin> addAdmin(@RequestBody @Valid CreateAdminCommand createAdminCommand) {
+		return new ResponseEntity<Admin>(this.service.addAdmin(createAdminCommand), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/documents/{authorId}")

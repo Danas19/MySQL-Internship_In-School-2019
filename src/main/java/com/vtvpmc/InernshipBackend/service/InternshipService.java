@@ -3,10 +3,12 @@ package com.vtvpmc.InernshipBackend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.Person;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
@@ -59,9 +61,8 @@ public class InternshipService {
 		User newUser = new User();
 		newUser.setUserGroup(userGroupRepository.findById(userGroupId).orElse(null));
 		
-		Person newPerson = new Person();
-		newPerson.setFirstName(createUserCommand.getFirstName());
-		newPerson.setLastName(createUserCommand.getLastName());
+		Person newPerson = new Person(createUserCommand.getFirstName(),
+		createUserCommand.getLastName());
 		newPerson.setUser(newUser);
 		
 		newUser.setPerson(newPerson);
@@ -75,5 +76,18 @@ public class InternshipService {
 		newUserGroup.setUserGroupName(createUserGroupCommand.getUserGroupName());
 		
 		return userGroupRepository.save(newUserGroup);
+	}
+	
+	public Admin addAdmin(CreateAdminCommand createAdminCommand) {
+		Admin newAdmin = new Admin();
+		
+		Person newPerson = new Person(createAdminCommand.getFirstName(),
+				createAdminCommand.getLastName());
+		newPerson.setAdmin(newAdmin);
+		
+		newAdmin.setPerson(newPerson);
+		
+		personRepository.save(newPerson);
+		return adminRepository.save(newAdmin);
 	}
 }
