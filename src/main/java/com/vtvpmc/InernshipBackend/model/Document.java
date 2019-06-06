@@ -1,4 +1,4 @@
-package com.tvtpmc.InernshipBackend.model;
+package com.vtvpmc.InernshipBackend.model;
 
 import java.sql.Blob;
 import java.sql.Date;

@@ -1,8 +1,8 @@
-package com.tvtpmc.InernshipBackend.repository;
+package com.vtvpmc.InernshipBackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.tvtpmc.InernshipBackend.model.Admin;
+import com.vtvpmc.InernshipBackend.model.Admin;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 

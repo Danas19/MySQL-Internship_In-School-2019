@@ -1,4 +1,4 @@
-package com.tvtpmc.InernshipBackend.model;
+package com.vtvpmc.InernshipBackend.model;
 
 import java.util.HashSet;
 import java.util.Set;

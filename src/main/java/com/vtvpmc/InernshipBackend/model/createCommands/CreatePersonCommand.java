@@ -1,4 +1,4 @@
-package com.tvtpmc.InernshipBackend.model.createCommands;
+package com.vtvpmc.InernshipBackend.model.createCommands;
 
 public class CreatePersonCommand {
 	private String firstName;

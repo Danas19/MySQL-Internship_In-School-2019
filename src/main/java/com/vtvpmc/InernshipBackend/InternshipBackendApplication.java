@@ -1,4 +1,4 @@
-package com.tvtpmc.InernshipBackend;
+package com.vtvpmc.InernshipBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,4 @@ public class InternshipBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InternshipBackendApplication.class, args);
 	}
-
 }
