@@ -105,4 +105,24 @@ public class InternshipService {
 		
 		return documentTypeRepository.save(newDocumentType);
 	}
+	
+	public Admin getAdmin(Long adminId) {
+		return this.adminRepository.findById(adminId).orElse(null);
+	}
+	
+	public User getUser(Long userId) {
+		return this.userRepository.findById(userId).orElse(null);
+	}
+	
+	public UserGroup getUserGroup(Long userGroupId) {
+		return this.userGroupRepository.findById(userGroupId).orElse(null);
+	}
+	
+	public Document getDocument(Long documentId) {
+		return this.documentRepository.findById(documentId).orElse(null);
+	}
+	
+	public DocumentType getDocumentType(Long documentTypeId) {
+		return this.documentTypeRepository.findById(documentTypeId).orElse(null);
+	}
 }
