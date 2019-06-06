@@ -3,10 +3,17 @@ package com.vtvpmc.InernshipBackend.model.createCommands;
 import java.sql.Blob;
 import java.sql.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 public class CreateDocumentCommand {
-	private Long authorId;
+	@NotNull
 	private Long documentTypeId;
+	@NotNull
 	private String title;
+	@NotNull
+	@Length(min = 1, max = 255)
 	private String description;
 	private Date sendedAtDate;
 	private Date acceptanceDate;
@@ -15,9 +22,6 @@ public class CreateDocumentCommand {
 	private String declinationReason;
 	private Blob file;
 	
-	public Long getAuthorId() {
-		return authorId;
-	}
 	public Long getDocumentTypeId() {
 		return documentTypeId;
 	}
