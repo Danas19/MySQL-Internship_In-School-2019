@@ -15,10 +15,31 @@ public class UserGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String userGroupName;
 	@OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
 	private Set<User> users;
 	
 	public UserGroup() {
 		users = new HashSet<>();
+	}
+
+	public String getUserGroupName() {
+		return userGroupName;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUserGroupName(String userGroupName) {
+		this.userGroupName = userGroupName;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
+	public void addUser(User user) {
+		users.add(user);
 	}
 }

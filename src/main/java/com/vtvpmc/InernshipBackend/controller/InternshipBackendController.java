@@ -1,6 +1,8 @@
 package com.vtvpmc.InernshipBackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +21,8 @@ public class InternshipBackendController {
 	private InternshipService service;
 	
 	@PostMapping("/documents")
-	public Document addDocument(Document document) {
-		return this.service.addDocument(document);
+	public ResponseEntity<Document> addDocument(Document document) {
+		return new ResponseEntity<Document>(this.service.addDocument(document), HttpStatus.CREATED);
 	}
 }
 
