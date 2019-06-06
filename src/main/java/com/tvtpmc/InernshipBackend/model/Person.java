@@ -17,13 +17,20 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-	private Set<Document> myDocuments = new HashSet<Document>();
+	private Set<Document> myDocuments;
 	@OneToMany(mappedBy = "accepter", cascade = CascadeType.ALL)
-	private Set<Document> acceptedDocuments = new HashSet<Document>();
+	private Set<Document> acceptedDocuments;
 	private String firstName;
 	private String lastName;
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
 	private Admin admin;
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
 	private User user;
+	
+	public Person() {
+		myDocuments = new HashSet<Document>();
+		acceptedDocuments = new HashSet<Document>();
+	}
+	
+	
 }

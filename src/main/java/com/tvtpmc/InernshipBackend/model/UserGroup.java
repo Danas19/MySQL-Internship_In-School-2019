@@ -1,5 +1,6 @@
 package com.tvtpmc.InernshipBackend.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,4 +17,8 @@ public class UserGroup {
 	private Long id;
 	@OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
 	private Set<User> users;
+	
+	public UserGroup() {
+		users = new HashSet<>();
+	}
 }

@@ -17,5 +17,9 @@ public class DocumentType {
 	private Long id;
 	private String typeName;
 	@OneToMany(mappedBy = "documentType", cascade = CascadeType.ALL)
-	private Set<Document> documents = new HashSet<>();
+	private Set<Document> documents;
+	
+	public DocumentType() {
+		documents = new HashSet<>();
+	}
 }
