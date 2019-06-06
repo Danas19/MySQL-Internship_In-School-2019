@@ -1,5 +1,7 @@
 package com.vtvpmc.InernshipBackend.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -124,5 +126,14 @@ public class InternshipService {
 	
 	public DocumentType getDocumentType(Long documentTypeId) {
 		return this.documentTypeRepository.findById(documentTypeId).orElse(null);
+	}
+	
+	public Optional<Admin> deletePersonByAdminId(Long adminId) {
+		Optional<Admin> oldAdminOptional = adminRepository.findById(adminId);
+		if (oldAdminOptional.isPresent()) {
+			personRepository.delete(oldAdminOptional.get().getPerson());
+			return oldAdminOptional;
+		}
+		return oldAdminOptional;
 	}
 }

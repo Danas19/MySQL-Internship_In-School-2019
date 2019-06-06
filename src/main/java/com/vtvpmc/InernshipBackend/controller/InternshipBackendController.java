@@ -1,11 +1,14 @@
 package com.vtvpmc.InernshipBackend.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,6 +88,15 @@ public class InternshipBackendController {
 	@GetMapping("/userGroups/{userGroupId}")
 	public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long userGroupId) {
 		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
+	}
+	
+	@DeleteMapping("/admins/{adminId}")
+	public ResponseEntity<Admin> deletePersonByAdminId(@PathVariable Long adminId) {
+		Optional<Admin> adminToBeDeletedOptional = service.deletePersonByAdminId(adminId);
+		if (adminToBeDeletedOptional.isPresent()) {
+			return ResponseEntity.ok().body(adminToBeDeletedOptional.get());
+		}
+		return ResponseEntity.badRequest().body(null);
 	}
 }
 
