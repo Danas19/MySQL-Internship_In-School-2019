@@ -161,4 +161,13 @@ public class InternshipService {
 		}
 		return oldAdminOptional;
 	}
+	
+	public Optional<User> deletePersonByUserId(Long userId) {
+		Optional<User> oldUserOptional = userRepository.findById(userId);
+		if (oldUserOptional.isPresent()) {
+			userRepository.deleteById(oldUserOptional.get().getPerson().getId());
+			return oldUserOptional;
+		}
+		return oldUserOptional;
+	}
 }

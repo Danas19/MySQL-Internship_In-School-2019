@@ -130,5 +130,14 @@ public class InternshipBackendController {
 		}
 		return ResponseEntity.badRequest().body(null);
 	}
+	
+	@DeleteMapping("/users/{userId}/persons")
+	public ResponseEntity<User> deletePersonByUserId(@PathVariable Long userId) {
+		Optional<User> userToBeDeletedOptional = service.deletePersonByUserId(userId);
+		if (userToBeDeletedOptional.isPresent()) {
+			return ResponseEntity.ok().body(userToBeDeletedOptional.get());
+		}
+		return ResponseEntity.badRequest().body(null);
+	}
 }
 
