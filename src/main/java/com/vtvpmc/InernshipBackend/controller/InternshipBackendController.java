@@ -149,5 +149,25 @@ public class InternshipBackendController {
 	public ResponseEntity<User> deleteUserRights(@PathVariable Long userId) {
 		return ResponseEntity.ok().body(service.deleteUserRights(userId));
 	}
+	
+	@DeleteMapping("/documents/{documentId}")
+	public ResponseEntity<Document> deleteDocument(@PathVariable Long documentId) {
+		return ResponseEntity.ok().body(service.deleteDocument(documentId));
+	}
+	
+	@DeleteMapping("/documentTypes/{documentTypeId}")
+	public ResponseEntity<DocumentType> deleteDocumentType(@PathVariable Long documentTypeId) {
+		return ResponseEntity.ok().body(service.deleteDocumentType(documentTypeId));
+	}
+	
+	@DeleteMapping("/persons/{personId}")
+	public ResponseEntity<Person> deletePerson(@PathVariable Long personId) {
+		return ResponseEntity.ok().body(service.deletePerson(personId));
+	}
+	
+	@DeleteMapping("/userGroups/{userGroupId}")
+	public ResponseEntity<UserGroup> deleteUserGroup(@PathVariable Long userGroupId) {
+		return ResponseEntity.ok().body(service.deleteUserGroup(userGroupId));
+	}
 }
 

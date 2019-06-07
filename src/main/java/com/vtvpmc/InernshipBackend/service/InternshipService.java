@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.vtvpmc.InernshipBackend.model.Admin;
@@ -183,5 +184,29 @@ public class InternshipService {
 		User oldUser = userRepository.findById(userId).orElse(null);
 		userRepository.deleteById(userId);
 		return oldUser;
+	}
+	
+	public Document deleteDocument(Long documentId) {
+		Document oldDocument = documentRepository.findById(documentId).orElse(null);
+		documentRepository.deleteById(documentId);
+		return oldDocument;
+	}
+	
+	public DocumentType deleteDocumentType(Long documentTypeId) {
+		DocumentType oldDocumentType = documentTypeRepository.findById(documentTypeId).orElse(null);
+		documentTypeRepository.deleteById(documentTypeId);
+		return oldDocumentType;
+	}
+	
+	public Person deletePerson(Long personId) {
+		Person oldPerson = personRepository.findById(personId).orElse(null);
+		personRepository.deleteById(personId);
+		return oldPerson;
+	}
+	
+	public UserGroup deleteUserGroup(Long userGroupId) {
+		UserGroup oldUserGroup = userGroupRepository.findById(userGroupId).orElse(null);
+		userGroupRepository.deleteById(userGroupId);
+		return oldUserGroup;
 	}
 }
