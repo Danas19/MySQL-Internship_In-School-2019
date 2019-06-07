@@ -18,6 +18,7 @@ import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentTypeCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreatePersonCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.repository.AdminRepository;
@@ -110,6 +111,25 @@ public class InternshipService {
 		newDocumentType.setTypeName(createDocumentTypeCommand.getTypeName());
 		
 		return documentTypeRepository.save(newDocumentType);
+	}
+	
+	public UserGroup setUserGroup(CreateUserGroupCommand createUserGroupCommand, Long userGroupId) {
+		UserGroup oldUserGroup = userGroupRepository.findById(userGroupId).orElse(null);
+		oldUserGroup.setUserGroupName(createUserGroupCommand.getUserGroupName());
+		return oldUserGroup;
+	}
+	
+	public Person setPerson(CreatePersonCommand createPersonCommand, Long personId) {
+		Person oldPerson = personRepository.findById(personId).orElse(null);
+		oldPerson.setFirstName(createPersonCommand.getFirstName());
+		oldPerson.setLastName(createPersonCommand.getLastName());
+		return oldPerson;
+	}
+	
+	public DocumentType setDocumentType(CreateDocumentTypeCommand createDocumentTypeCommand, Long documentTypeId) {
+		DocumentType oldDocumentType = documentTypeRepository.findById(documentTypeId).orElse(null);
+		oldDocumentType.setTypeName(createDocumentTypeCommand.getTypeName());
+		return oldDocumentType;
 	}
 	
 	public Admin getAdmin(Long adminId) {
@@ -209,4 +229,5 @@ public class InternshipService {
 		userGroupRepository.deleteById(userGroupId);
 		return oldUserGroup;
 	}
+	
 }

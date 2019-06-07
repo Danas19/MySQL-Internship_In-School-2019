@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateDocumentTypeCommand;
+import com.vtvpmc.InernshipBackend.model.createCommands.CreatePersonCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserCommand;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.service.InternshipService;
@@ -67,6 +69,26 @@ public class InternshipBackendController {
 					HttpStatus.CREATED);
 	}
 	
+	@PutMapping("/userGroups/{userGroupId}")
+	public ResponseEntity<UserGroup> setUserGroup(@RequestBody @Valid CreateUserGroupCommand createUserGroupCommand,
+			@PathVariable Long userGroupId) {
+		return new ResponseEntity<UserGroup>(this.service
+				.setUserGroup(createUserGroupCommand, userGroupId), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/persons/{personId}")
+	public ResponseEntity<Person> setPerson(@RequestBody @Valid CreatePersonCommand createPersonCommand,
+			@PathVariable Long personId) {
+		return new ResponseEntity<Person>(this.service
+				.setPerson(createPersonCommand, personId), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/documentTypes/{documentTypeId}")
+	public ResponseEntity<DocumentType> setDocumentType(@RequestBody @Valid CreateDocumentTypeCommand createDocumentTypeCommand,
+			@PathVariable Long documentTypeId) {
+		return new ResponseEntity<DocumentType>(this.service
+				.setDocumentType(createDocumentTypeCommand, documentTypeId), HttpStatus.CREATED);
+	}
 	
 	
 	@GetMapping("/admins/{adminId}")
@@ -171,5 +193,6 @@ public class InternshipBackendController {
 	public ResponseEntity<UserGroup> deleteUserGroup(@PathVariable Long userGroupId) {
 		return ResponseEntity.ok().body(service.deleteUserGroup(userGroupId));
 	}
+	
 }
 
