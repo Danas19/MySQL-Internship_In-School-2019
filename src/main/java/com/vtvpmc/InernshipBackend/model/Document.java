@@ -118,6 +118,10 @@ public class Document {
 	public void setFile(Blob file) {
 		this.file = file;
 	}
+
+	public Date getSendedAtDate() {
+		return sendedAtDate;
+	}
 	
 	
 }

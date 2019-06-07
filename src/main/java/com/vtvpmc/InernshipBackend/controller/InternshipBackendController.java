@@ -1,5 +1,6 @@
 package com.vtvpmc.InernshipBackend.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.DocumentType;
+import com.vtvpmc.InernshipBackend.model.Person;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
 import com.vtvpmc.InernshipBackend.model.createCommands.CreateAdminCommand;
@@ -88,6 +90,36 @@ public class InternshipBackendController {
 	@GetMapping("/userGroups/{userGroupId}")
 	public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long userGroupId) {
 		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
+	}
+	
+	@GetMapping("/documents")
+	public ResponseEntity<List<Document>> getDocuments() {
+		return ResponseEntity.ok().body(this.service.getDocuments());
+	}
+	
+	@GetMapping("/documentTypes")
+	public ResponseEntity<List<DocumentType>> getDocumentTypes() {
+		return ResponseEntity.ok().body(this.service.getDocumentTypes());
+	}
+	
+	@GetMapping("/users")
+	public ResponseEntity<List<User>> getUsers() {
+		return ResponseEntity.ok().body(this.service.getUsers());
+	}
+	
+	@GetMapping("/userGroups")
+	public ResponseEntity<List<UserGroup>> getUserGroups() {
+		return ResponseEntity.ok().body(this.service.getUserGroups());
+	}
+	
+	@GetMapping("/admins")
+	public ResponseEntity<List<Admin>> getAdmins() {
+		return ResponseEntity.ok().body(this.service.getAdmins());
+	}
+	
+	@GetMapping("/persons")
+	public ResponseEntity<List<Person>> getPersons() {
+		return ResponseEntity.ok().body(this.service.getPersons());
 	}
 	
 	@DeleteMapping("/admins/{adminId}")

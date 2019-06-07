@@ -1,5 +1,6 @@
 package com.vtvpmc.InernshipBackend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,30 @@ public class InternshipService {
 	
 	public DocumentType getDocumentType(Long documentTypeId) {
 		return this.documentTypeRepository.findById(documentTypeId).orElse(null);
+	}
+	
+	public List<Document> getDocuments() {
+		return this.documentRepository.findAll();
+	}
+	
+	public List<DocumentType> getDocumentTypes() {
+		return this.documentTypeRepository.findAll();
+	}
+	
+	public List<Person> getPersons() {
+		return this.personRepository.findAll();
+	}
+	
+	public List<Admin> getAdmins() {
+		return this.adminRepository.findAll();
+	}
+	
+	public List<User> getUsers() {
+		return this.userRepository.findAll();
+	}
+	
+	public List<UserGroup> getUserGroups() {
+		return this.userGroupRepository.findAll();
 	}
 	
 	public Optional<Admin> deletePersonByAdminId(Long adminId) {
