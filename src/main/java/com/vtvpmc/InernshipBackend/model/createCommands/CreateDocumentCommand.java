@@ -1,5 +1,6 @@
 package com.vtvpmc.InernshipBackend.model.createCommands;
 
+import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 
@@ -18,7 +19,7 @@ public class CreateDocumentCommand {
 	private Date declinationDate;
 	private Long accepterId;
 	private String declinationReason;
-	private Blob file;
+	private File file;
 	
 	public String getTitle() {
 		return title;
@@ -48,7 +49,7 @@ public class CreateDocumentCommand {
 		return declinationReason;
 	}
 	
-	public Blob getFile() {
+	public File getFile() {
 		return file;
 	}
 	

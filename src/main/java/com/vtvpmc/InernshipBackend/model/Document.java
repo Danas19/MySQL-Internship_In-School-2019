@@ -1,5 +1,6 @@
 package com.vtvpmc.InernshipBackend.model;
 
+import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 
@@ -45,7 +46,7 @@ public class Document {
 	private Person accepter;
 	private String declinationReason;
 	@Lob
-	private Blob file;
+	private File file;
 	
 	public Long getUniqueNumber() {
 		return uniqueNumber;
@@ -83,7 +84,7 @@ public class Document {
 		return declinationReason;
 	}
 	
-	public Blob getFile() {
+	public File getFile() {
 		return file;
 	}
 	
@@ -119,7 +120,7 @@ public class Document {
 		this.declinationReason = declinationReason;
 	}
 	
-	public void setFile(Blob file) {
+	public void setFile(File file) {
 		this.file = file;
 	}
 

@@ -16,17 +16,29 @@ class AddDocument extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { authorId, documentTypeId, title, description } = this.state;
-        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description})
+        const { authorId, documentTypeId, title, description, file } = this.state;
+        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description, file})
         .then((result) => {
             this.props.history.push('/');
         });
     }
 
-    onChange = (e) => {
+    onChangeInput = (e) => {
         const state = this.state;
         state[e.target.name] = e.target.value;
         this.setState(state);
+    }
+
+    onChangeFile = (e) => {
+        let file = e.target.files[0];
+        if (file.name.endsWith('.pdf')) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                this.setState({file: e.target.result});
+                console.log(e.target.result);
+            }
+        }
     }
 
     render() {
@@ -35,16 +47,19 @@ class AddDocument extends Component {
             <div className='component'>
                 <form onSubmit={this.onSubmit}>
                     <label>Author Id: </label>
-                    <input name='authorId' value={authorId} onChange={this.onChange}></input>
+                    <input name='authorId' value={authorId} onChange={this.onChangeInput}></input>
 
                     <label>Document Type Id: </label>
-                    <input name='documentTypeId' value={documentTypeId} onChange={this.onChange}></input>
+                    <input name='documentTypeId' value={documentTypeId} onChange={this.onChangeInput}></input>
 
                     <label>Title: </label>
-                    <input name='title' value={title} onChange={this.onChange}></input>
+                    <input name='title' value={title} onChange={this.onChangeInput}></input>
 
                     <label>Description: </label>
-                    <input name='description' value={description} onChange={this.onChange}></input>
+                    <input name='description' value={description} onChange={this.onChangeInput}></input>
+
+                    <input type='file' onChange={this.onChangeFile}></input>
+
                     <button>Add Document</button>
                 </form>
             </div>

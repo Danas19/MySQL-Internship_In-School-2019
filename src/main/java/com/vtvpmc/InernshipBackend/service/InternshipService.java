@@ -110,6 +110,7 @@ public class InternshipService {
 		
 		if (createDocumentCommand.getFile() != null) {
 			newDocument.setFile(createDocumentCommand.getFile());
+			System.out.println(createDocumentCommand.getFile());
 		}
 		
 		return this.documentRepository.save(newDocument);
