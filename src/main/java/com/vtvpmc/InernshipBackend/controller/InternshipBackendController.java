@@ -44,7 +44,7 @@ public class InternshipBackendController {
 		return new ResponseEntity<UserGroup>(this.service.addUserGroup(createUserGroupCommand), HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/userGroups/{userGroupId}/users")
+	@PostMapping("/users/{userGroupId}")
 	public ResponseEntity<User> addUser(@RequestBody @Valid CreateUserCommand createUserCommand,
 				@PathVariable Long userGroupId) {
 		return new ResponseEntity<User>(this.service.addUser(createUserCommand, userGroupId), HttpStatus.CREATED);
@@ -66,6 +66,8 @@ public class InternshipBackendController {
 		return new ResponseEntity<Document>(this.service.addDocument(createDocumentCommand, documentTypeId, authorId),
 					HttpStatus.CREATED);
 	}
+	
+	
 	
 	@GetMapping("/admins/{adminId}")
 	public ResponseEntity<Admin> getAdmin(@PathVariable Long adminId) {
