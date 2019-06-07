@@ -36,9 +36,9 @@ public class Document {
 	@CreationTimestamp
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date sendedAtDate;
-	@Column(columnDefinition="TIMESTAMP DEFAULT '0000-00-00 00:00:00'")
+	@Column(columnDefinition="DATETIME")
 	private Date acceptanceDate;
-	@Column(columnDefinition="TIMESTAMP DEFAULT '0000-00-00 00:00:00'")
+	@Column(columnDefinition="DATETIME")
 	private Date declinationDate;
 	@JsonIgnore
 	@OneToOne
