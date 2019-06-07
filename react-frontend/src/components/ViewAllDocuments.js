@@ -19,7 +19,7 @@ class ViewAllDocuments extends Component {
 
     render() {
         return (
-            <div className='component'>
+            <div className='container'>
                 <table>
               <thead>
               <tr>

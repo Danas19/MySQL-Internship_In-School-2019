@@ -44,7 +44,7 @@ class AddDocument extends Component {
     render() {
         const { authorId, documentTypeId, title, description } = this.state;
         return (
-            <div className='component'>
+            <div className='container'>
                 <form onSubmit={this.onSubmit}>
                     <label>Author Id: </label>
                     <input name='authorId' value={authorId} onChange={this.onChangeInput}></input>
