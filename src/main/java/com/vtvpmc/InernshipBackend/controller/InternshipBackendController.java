@@ -122,7 +122,7 @@ public class InternshipBackendController {
 		return ResponseEntity.ok().body(this.service.getPersons());
 	}
 	
-	@DeleteMapping("/admins/{adminId}")
+	@DeleteMapping("/admins/{adminId}/persons")
 	public ResponseEntity<Admin> deletePersonByAdminId(@PathVariable Long adminId) {
 		Optional<Admin> adminToBeDeletedOptional = service.deletePersonByAdminId(adminId);
 		if (adminToBeDeletedOptional.isPresent()) {
