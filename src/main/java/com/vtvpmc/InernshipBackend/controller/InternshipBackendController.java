@@ -41,6 +41,62 @@ public class InternshipBackendController {
 	@Autowired
 	private InternshipService service;
 	
+	@GetMapping("/documents")
+	public ResponseEntity<List<Document>> getDocuments() {
+		return ResponseEntity.ok().body(this.service.getDocuments());
+	}
+	
+	@GetMapping("/documentTypes")
+	public ResponseEntity<List<DocumentType>> getDocumentTypes() {
+		return ResponseEntity.ok().body(this.service.getDocumentTypes());
+	}
+	
+	@GetMapping("/users")
+	public ResponseEntity<List<User>> getUsers() {
+		return ResponseEntity.ok().body(this.service.getUsers());
+	}
+	
+	@GetMapping("/userGroups")
+	public ResponseEntity<List<UserGroup>> getUserGroups() {
+		return ResponseEntity.ok().body(this.service.getUserGroups());
+	}
+	
+	@GetMapping("/admins")
+	public ResponseEntity<List<Admin>> getAdmins() {
+		return ResponseEntity.ok().body(this.service.getAdmins());
+	}
+	
+	@GetMapping("/persons")
+	public ResponseEntity<List<Person>> getPersons() {
+		return ResponseEntity.ok().body(this.service.getPersons());
+	}
+	
+	
+	@GetMapping("/admins/{adminId}")
+	public ResponseEntity<Admin> getAdmin(@PathVariable Long adminId) {
+		return ResponseEntity.ok().body(this.service.getAdmin(adminId));
+	}
+	
+	@GetMapping("/users/{userId}")
+	public ResponseEntity<User> getUser(@PathVariable Long userId) {
+		return ResponseEntity.ok().body(this.service.getUser(userId));
+	}
+	
+	@GetMapping("/documents/{documentId}")
+	public ResponseEntity<Document> getDocument(@PathVariable Long documentId) {
+		return ResponseEntity.ok().body(this.service.getDocument(documentId));
+	}
+	
+	@GetMapping("/documentTypes/{documentTypeId}")
+	public ResponseEntity<DocumentType> getdocumentType(@PathVariable Long documentTypeId) {
+		return ResponseEntity.ok().body(this.service.getDocumentType(documentTypeId));
+	}
+	
+	@GetMapping("/userGroups/{userGroupId}")
+	public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long userGroupId) {
+		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
+	}
+	
 	@PostMapping("/userGroups")
 	public ResponseEntity<UserGroup> addUserGroup(@RequestBody @Valid CreateUserGroupCommand createUserGroupCommand) {
 		return new ResponseEntity<UserGroup>(this.service.addUserGroup(createUserGroupCommand), HttpStatus.CREATED);
@@ -91,60 +147,6 @@ public class InternshipBackendController {
 	}
 	
 	
-	@GetMapping("/admins/{adminId}")
-	public ResponseEntity<Admin> getAdmin(@PathVariable Long adminId) {
-		return ResponseEntity.ok().body(this.service.getAdmin(adminId));
-	}
-	
-	@GetMapping("/users/{userId}")
-	public ResponseEntity<User> getUser(@PathVariable Long userId) {
-		return ResponseEntity.ok().body(this.service.getUser(userId));
-	}
-	
-	@GetMapping("/documents/{documentId}")
-	public ResponseEntity<Document> getDocument(@PathVariable Long documentId) {
-		return ResponseEntity.ok().body(this.service.getDocument(documentId));
-	}
-	
-	@GetMapping("/documentTypes/{documentTypeId}")
-	public ResponseEntity<DocumentType> getdocumentType(@PathVariable Long documentTypeId) {
-		return ResponseEntity.ok().body(this.service.getDocumentType(documentTypeId));
-	}
-	
-	@GetMapping("/userGroups/{userGroupId}")
-	public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long userGroupId) {
-		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
-	}
-	
-	@GetMapping("/documents")
-	public ResponseEntity<List<Document>> getDocuments() {
-		return ResponseEntity.ok().body(this.service.getDocuments());
-	}
-	
-	@GetMapping("/documentTypes")
-	public ResponseEntity<List<DocumentType>> getDocumentTypes() {
-		return ResponseEntity.ok().body(this.service.getDocumentTypes());
-	}
-	
-	@GetMapping("/users")
-	public ResponseEntity<List<User>> getUsers() {
-		return ResponseEntity.ok().body(this.service.getUsers());
-	}
-	
-	@GetMapping("/userGroups")
-	public ResponseEntity<List<UserGroup>> getUserGroups() {
-		return ResponseEntity.ok().body(this.service.getUserGroups());
-	}
-	
-	@GetMapping("/admins")
-	public ResponseEntity<List<Admin>> getAdmins() {
-		return ResponseEntity.ok().body(this.service.getAdmins());
-	}
-	
-	@GetMapping("/persons")
-	public ResponseEntity<List<Person>> getPersons() {
-		return ResponseEntity.ok().body(this.service.getPersons());
-	}
 	
 	@DeleteMapping("/admins/{adminId}/persons")
 	public ResponseEntity<Admin> deletePersonByAdminId(@PathVariable Long adminId) {

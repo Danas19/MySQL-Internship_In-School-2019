@@ -51,6 +51,52 @@ public class InternshipService {
 	}
 
 
+	public List<Document> getDocuments() {
+		return this.documentRepository.findAll();
+	}
+	
+	public List<DocumentType> getDocumentTypes() {
+		return this.documentTypeRepository.findAll();
+	}
+	
+	public List<Person> getPersons() {
+		return this.personRepository.findAll();
+	}
+	
+	public List<Admin> getAdmins() {
+		return this.adminRepository.findAll();
+	}
+	
+	public List<User> getUsers() {
+		return this.userRepository.findAll();
+	}
+	
+	public List<UserGroup> getUserGroups() {
+		return this.userGroupRepository.findAll();
+	}
+	
+	
+	public Admin getAdmin(Long adminId) {
+		return this.adminRepository.findById(adminId).orElse(null);
+	}
+	
+	public User getUser(Long userId) {
+		return this.userRepository.findById(userId).orElse(null);
+	}
+	
+	public UserGroup getUserGroup(Long userGroupId) {
+		return this.userGroupRepository.findById(userGroupId).orElse(null);
+	}
+	
+	public Document getDocument(Long documentId) {
+		return this.documentRepository.findById(documentId).orElse(null);
+	}
+	
+	public DocumentType getDocumentType(Long documentTypeId) {
+		return this.documentTypeRepository.findById(documentTypeId).orElse(null);
+	}
+	
+	
 	public Document addDocument(CreateDocumentCommand createDocumentCommand, 
 					Long documentTypeId, Long authorId) {
 		Document newDocument = new Document();
@@ -132,49 +178,9 @@ public class InternshipService {
 		return oldDocumentType;
 	}
 	
-	public Admin getAdmin(Long adminId) {
-		return this.adminRepository.findById(adminId).orElse(null);
-	}
 	
-	public User getUser(Long userId) {
-		return this.userRepository.findById(userId).orElse(null);
-	}
 	
-	public UserGroup getUserGroup(Long userGroupId) {
-		return this.userGroupRepository.findById(userGroupId).orElse(null);
-	}
 	
-	public Document getDocument(Long documentId) {
-		return this.documentRepository.findById(documentId).orElse(null);
-	}
-	
-	public DocumentType getDocumentType(Long documentTypeId) {
-		return this.documentTypeRepository.findById(documentTypeId).orElse(null);
-	}
-	
-	public List<Document> getDocuments() {
-		return this.documentRepository.findAll();
-	}
-	
-	public List<DocumentType> getDocumentTypes() {
-		return this.documentTypeRepository.findAll();
-	}
-	
-	public List<Person> getPersons() {
-		return this.personRepository.findAll();
-	}
-	
-	public List<Admin> getAdmins() {
-		return this.adminRepository.findAll();
-	}
-	
-	public List<User> getUsers() {
-		return this.userRepository.findAll();
-	}
-	
-	public List<UserGroup> getUserGroups() {
-		return this.userGroupRepository.findAll();
-	}
 	
 	public Optional<Admin> deletePersonByAdminId(Long adminId) {
 		Optional<Admin> oldAdminOptional = adminRepository.findById(adminId);
