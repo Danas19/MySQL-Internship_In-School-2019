@@ -1,0 +1,17 @@
+* {
+    background-color: lightblue;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+}
+
+tr:hover {
+    color: white;
+    background-color: black;
+}
