@@ -22,6 +22,10 @@ public class UserGroup {
 	public UserGroup() {
 		users = new HashSet<>();
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public String getUserGroupName() {
 		return userGroupName;

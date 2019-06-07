@@ -24,6 +24,10 @@ public class User {
 	@JoinColumn(name = "user_group_id")
 	private UserGroup userGroup;
 	
+	public Long getId() {
+		return id;
+	}
+	
 	public Person getPerson() {
 		return person;
 	}

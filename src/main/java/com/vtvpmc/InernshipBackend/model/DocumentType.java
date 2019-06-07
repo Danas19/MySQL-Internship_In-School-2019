@@ -22,6 +22,10 @@ public class DocumentType {
 	public DocumentType() {
 		documents = new HashSet<>();
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public String getTypeName() {
 		return typeName;

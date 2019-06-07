@@ -156,7 +156,7 @@ public class InternshipService {
 	public Optional<Admin> deletePersonByAdminId(Long adminId) {
 		Optional<Admin> oldAdminOptional = adminRepository.findById(adminId);
 		if (oldAdminOptional.isPresent()) {
-			personRepository.delete(oldAdminOptional.get().getPerson());
+			personRepository.deleteById(oldAdminOptional.get().getPerson().getId());
 			return oldAdminOptional;
 		}
 		return oldAdminOptional;

@@ -36,6 +36,10 @@ public class Person {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public Set<Document> getMyDocuments() {
 		return myDocuments;

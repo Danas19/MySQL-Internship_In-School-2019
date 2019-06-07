@@ -9,14 +9,18 @@ class AddDocument extends Component {
             authorId: '',
             documentTypeId: '',
             title: '',
-            description: ''
+            description: '',
+            file: ''
         }
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const { authorId, documentTypeId, title, description } = this.state;
-        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description});
+        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description})
+        .then((result) => {
+            this.props.history.push('/');
+        });
     }
 
     onChange = (e) => {

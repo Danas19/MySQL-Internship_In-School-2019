@@ -19,6 +19,11 @@ public class Admin {
 	@JoinColumn(name = "person_id")
 	private Person person;
 	
+	
+	public Long getId() {
+		return id;
+	}
+	
 	public Person getPerson() {
 		return person;
 	}

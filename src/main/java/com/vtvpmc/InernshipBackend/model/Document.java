@@ -47,6 +47,10 @@ public class Document {
 	@Lob
 	private Blob file;
 	
+	public Long getUniqueNumber() {
+		return uniqueNumber;
+	}
+	
 	public Person getAuthor() {
 		return author;
 	}
