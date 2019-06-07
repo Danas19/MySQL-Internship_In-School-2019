@@ -139,5 +139,15 @@ public class InternshipBackendController {
 		}
 		return ResponseEntity.badRequest().body(null);
 	}
+	
+	@DeleteMapping("/admins/{adminId}")
+	public ResponseEntity<Admin> deleteAdminRights(@PathVariable Long adminId) {
+		return ResponseEntity.ok().body(service.deleteAdminRights(adminId));
+	}
+	
+	@DeleteMapping("/users/{userId}")
+	public ResponseEntity<User> deleteUserRights(@PathVariable Long userId) {
+		return ResponseEntity.ok().body(service.deleteUserRights(userId));
+	}
 }
 

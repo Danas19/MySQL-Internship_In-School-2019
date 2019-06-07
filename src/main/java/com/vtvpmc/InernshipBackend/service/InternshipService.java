@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
@@ -169,5 +171,17 @@ public class InternshipService {
 			return oldUserOptional;
 		}
 		return oldUserOptional;
+	}
+	
+	public Admin deleteAdminRights(Long adminId) {
+		Admin oldAdmin = adminRepository.findById(adminId).orElse(null);
+		adminRepository.deleteById(adminId);
+		return oldAdmin;
+	}
+	
+	public User deleteUserRights(Long userId) {
+		User oldUser = userRepository.findById(userId).orElse(null);
+		userRepository.deleteById(userId);
+		return oldUser;
 	}
 }
