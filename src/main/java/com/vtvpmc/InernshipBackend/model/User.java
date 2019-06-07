@@ -1,11 +1,15 @@
 package com.vtvpmc.InernshipBackend.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,10 +23,16 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "person_id")
 	private Person person;
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "user_group_id")
-	private UserGroup userGroup;
+	@ManyToMany
+	@JoinTable(
+	  name = "us3r_gr0up", 
+	  joinColumns = @JoinColumn(name = "us3r_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "gr0up_id"))
+	 Set<UserGroup> gr0ups;
+	
+	public User() {
+		gr0ups = new HashSet<>();
+	}
 	
 	public Long getId() {
 		return id;
@@ -32,16 +42,20 @@ public class User {
 		return person;
 	}
 	
-	public UserGroup getUserGroup() {
-		return userGroup;
+	public Set<UserGroup> getGroups() {
+		return gr0ups;
 	}
 	
 	public void setPerson(Person person) {
 		this.person = person;
 	}
 	
-	public void setUserGroup(UserGroup userGroup) {
-		this.userGroup = userGroup;
+	public void setGroups(Set<UserGroup> groups) {
+		this.gr0ups = groups;
+	}
+	
+	public void addGroup(UserGroup group) {
+		this.gr0ups.add(group);
 	}
 	
 	

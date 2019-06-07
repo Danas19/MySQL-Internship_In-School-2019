@@ -3,12 +3,13 @@ package com.vtvpmc.InernshipBackend.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class UserGroup {
@@ -16,11 +17,11 @@ public class UserGroup {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String userGroupName;
-	@OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
-	private Set<User> users;
+	@ManyToMany(mappedBy = "gr0ups")
+	private Set<User> us3rs;
 	
 	public UserGroup() {
-		users = new HashSet<>();
+		us3rs = new HashSet<>();
 	}
 	
 	public Long getId() {
@@ -31,8 +32,9 @@ public class UserGroup {
 		return userGroupName;
 	}
 
+	@JsonIgnore
 	public Set<User> getUsers() {
-		return users;
+		return us3rs;
 	}
 
 	public void setUserGroupName(String userGroupName) {
@@ -40,10 +42,10 @@ public class UserGroup {
 	}
 
 	public void setUsers(Set<User> users) {
-		this.users = users;
+		this.us3rs = users;
 	}
 	
 	public void addUser(User user) {
-		users.add(user);
+		us3rs.add(user);
 	}
 }

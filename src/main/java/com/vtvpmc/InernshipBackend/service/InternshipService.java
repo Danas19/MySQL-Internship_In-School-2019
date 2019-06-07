@@ -118,7 +118,7 @@ public class InternshipService {
 	
 	public User addUser(CreateUserCommand createUserCommand, Long userGroupId) {
 		User newUser = new User();
-		newUser.setUserGroup(userGroupRepository.findById(userGroupId).orElse(null));
+		newUser.addGroup(userGroupRepository.findById(userGroupId).orElse(null));
 		
 		Person newPerson = new Person(createUserCommand.getFirstName(),
 		createUserCommand.getLastName());

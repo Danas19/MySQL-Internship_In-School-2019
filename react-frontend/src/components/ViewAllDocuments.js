@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Document, Page } from 'react-pdf';
 
 class ViewAllDocuments extends Component {
     constructor() {
@@ -48,7 +49,7 @@ class ViewAllDocuments extends Component {
                   <td>{d.declinationDate}</td>
                   <td>{d.accepter}</td>
                   <td>{d.declinationReason}</td>
-                  <td>{d.file}</td>
+                  <td>{d.file != null ? 'Pdf byla yra' : 'Nera file\'o'}</td>
                   </tr>
                   )}
                   
