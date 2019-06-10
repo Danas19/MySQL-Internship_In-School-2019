@@ -8,6 +8,7 @@ import AddAdmin from './components/AddAdmin';
 import ViewAllPersons from './components/ViewAllPersons';
 import AddUserGroup from './components/AddUserGroup';
 import ViewAllUserGroups from './components/ViewAllUserGroups';
+import AddUser from './components/AddUser';
 
 ReactDOM.render(
   <Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route exact path = "/admins/add" component={AddAdmin} />
         <Route exact path = "/userGroups" component={ViewAllUserGroups} />
         <Route exact path = "/userGroups/add" component={AddUserGroup} />
+        <Route exact path = "/users/add" component={AddUser} />
       </div>
   </Router>,
   document.getElementById('root')

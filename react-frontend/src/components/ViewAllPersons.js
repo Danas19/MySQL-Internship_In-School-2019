@@ -14,6 +14,7 @@ class ViewAllPersons extends Component {
         axios.get('http://localhost:8080/api/internship/persons')
         .then((result) => {
             this.setState({persons: result.data});
+            console.log(result.data);
         });
     }
 
@@ -37,7 +38,7 @@ class ViewAllPersons extends Component {
                   <td>{p.firstName}</td>
                   <td>{p.lastName}</td>
                   <td>{p.admin != null ? "YES" : "NO"}</td>
-                  <td>{p.user != null ? "YES" : "NO"}</td>
+                  <td>{p.user != null ? p.user.groups.map(g => g.userGroupName) : "NO"}</td>
                   </tr>
                   )}
                   
