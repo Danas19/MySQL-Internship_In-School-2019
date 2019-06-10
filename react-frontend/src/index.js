@@ -6,6 +6,8 @@ import App from './App.js';
 import ViewAllDocuments from './components/ViewAllDocuments';
 import AddAdmin from './components/AddAdmin';
 import ViewAllPersons from './components/ViewAllPersons';
+import AddUserGroup from './components/AddUserGroup';
+import ViewAllUserGroups from './components/ViewAllUserGroups';
 
 ReactDOM.render(
   <Router>
@@ -15,6 +17,8 @@ ReactDOM.render(
         <Route exact path = "/documents/add" component={AddDocument} />
         <Route exact path = "/persons" component={ViewAllPersons} />
         <Route exact path = "/admins/add" component={AddAdmin} />
+        <Route exact path = "/userGroups" component={ViewAllUserGroups} />
+        <Route exact path = "/userGroups/add" component={AddUserGroup} />
       </div>
   </Router>,
   document.getElementById('root')
