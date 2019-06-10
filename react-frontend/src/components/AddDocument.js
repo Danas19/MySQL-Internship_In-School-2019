@@ -10,14 +10,14 @@ class AddDocument extends Component {
             documentTypeId: '',
             title: '',
             description: '',
-            file: ''
+            files: []
         }
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { authorId, documentTypeId, title, description, file } = this.state;
-        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description, file})
+        const { authorId, documentTypeId, title, description, files } = this.state;
+        axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description, files})
         .then((result) => {
             this.props.history.push('/');
         });
@@ -29,16 +29,13 @@ class AddDocument extends Component {
         this.setState(state);
     }
 
-    onChangeFile = (e) => {
-        let file = e.target.files[0];
-        if (file.name.endsWith('.pdf')) {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (e) => {
-                this.setState({file: e.target.result});
-                console.log(e.target.result);
-            }
+    onChangeFiles = (e) => {
+        let files = [];
+        for (var i = 0; i < e.target.files.length; i++) {
+            files.push(e.target.files[i]);
         }
+        console.log(fileURLS);
+        this.setState({files: fileURLS});
     }
 
     render() {
@@ -58,7 +55,7 @@ class AddDocument extends Component {
                     <label>Description: </label>
                     <input name='description' value={description} onChange={this.onChangeInput}></input>
 
-                    <input type='file' onChange={this.onChangeFile}></input>
+                    <input type='file' accept=".pdf" multiple onChange={this.onChangeFiles}></input>
 
                     <button>Add Document</button>
                 </form>
