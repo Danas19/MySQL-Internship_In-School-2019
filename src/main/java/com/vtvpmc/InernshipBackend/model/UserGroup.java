@@ -19,6 +19,10 @@ public class UserGroup {
 	private String userGroupName;
 	@ManyToMany(mappedBy = "gr0ups")
 	private Set<User> us3rs;
+	@ManyToMany(mappedBy = "groupsWhichCanCreate")
+	private Set<DocumentType> documentTypesWeCanCreate;
+	@ManyToMany(mappedBy = "groupsWhichCanAccept")
+	private Set<DocumentType> documentTypesWeCanAccept;
 	
 	public UserGroup() {
 		us3rs = new HashSet<>();
@@ -48,4 +52,21 @@ public class UserGroup {
 	public void addUser(User user) {
 		us3rs.add(user);
 	}
+
+	public Set<DocumentType> getDocumentTypesWeCanCreate() {
+		return documentTypesWeCanCreate;
+	}
+
+	public void setDocumentTypesWeCanCreate(Set<DocumentType> documentTypesWeCanCreate) {
+		this.documentTypesWeCanCreate = documentTypesWeCanCreate;
+	}
+
+	public Set<DocumentType> getDocumentTypesWeCanAccept() {
+		return documentTypesWeCanAccept;
+	}
+
+	public void setDocumentTypesWeCanAccept(Set<DocumentType> documentTypesWeCanAccept) {
+		this.documentTypesWeCanAccept = documentTypesWeCanAccept;
+	}
+	
 }

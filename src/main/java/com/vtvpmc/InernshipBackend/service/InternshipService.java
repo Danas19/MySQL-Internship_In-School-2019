@@ -1,5 +1,6 @@
 package com.vtvpmc.InernshipBackend.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.DocumentType;
+import com.vtvpmc.InernshipBackend.model.PdfFile;
 import com.vtvpmc.InernshipBackend.model.Person;
 import com.vtvpmc.InernshipBackend.model.User;
 import com.vtvpmc.InernshipBackend.model.UserGroup;
@@ -21,6 +23,7 @@ import com.vtvpmc.InernshipBackend.model.createCommands.CreateUserGroupCommand;
 import com.vtvpmc.InernshipBackend.repository.AdminRepository;
 import com.vtvpmc.InernshipBackend.repository.DocumentRepository;
 import com.vtvpmc.InernshipBackend.repository.DocumentTypeRepository;
+import com.vtvpmc.InernshipBackend.repository.PdfFileRepository;
 import com.vtvpmc.InernshipBackend.repository.PersonRepository;
 import com.vtvpmc.InernshipBackend.repository.UserGroupRepository;
 import com.vtvpmc.InernshipBackend.repository.UserRepository;
@@ -33,6 +36,7 @@ public class InternshipService {
 	private UserRepository userRepository;
 	private UserGroupRepository userGroupRepository;
 	private AdminRepository adminRepository;
+	private PdfFileRepository pdfFileRepository;
 	
 	@Autowired
 	public InternshipService(DocumentRepository documentRepository, DocumentTypeRepository documentTypeRepository,
@@ -45,6 +49,7 @@ public class InternshipService {
 		this.userRepository = userRepository;
 		this.userGroupRepository = userGroupRepository;
 		this.adminRepository = adminRepository;
+		this.pdfFileRepository = pdfFileRepository;
 	}
 
 
@@ -108,9 +113,15 @@ public class InternshipService {
 		newDocument.setTitle(createDocumentCommand.getTitle());
 		newDocument.setDescription(createDocumentCommand.getDescription());
 		
-		if (createDocumentCommand.getFile() != null) {
-			newDocument.setFile(createDocumentCommand.getFile());
-			System.out.println(createDocumentCommand.getFile());
+		if (createDocumentCommand.getFiles() != null 
+						&& createDocumentCommand.getFiles().size() > 0) {
+			for (File file : createDocumentCommand.getFiles()) {
+				PdfFile pdfFile = new PdfFile(file);
+				newDocument.addPdfFile(pdfFile);
+				pdfFile.setDocument(newDocument);
+				pdfFileRepository.save(pdfFile);
+			}
+			System.out.println(createDocumentCommand.getFiles());
 		}
 		
 		return this.documentRepository.save(newDocument);

@@ -25,7 +25,7 @@ public class User {
 	private Person person;
 	@ManyToMany
 	@JoinTable(
-	  name = "us3r_gr0up", 
+	  name = "us3r_us3r_gr0up", 
 	  joinColumns = @JoinColumn(name = "us3r_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "gr0up_id"))
 	 Set<UserGroup> gr0ups;

@@ -1,20 +1,22 @@
 package com.vtvpmc.InernshipBackend.model;
 
-import java.io.File;
-import java.sql.Blob;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,8 +35,7 @@ public class Document {
 	private DocumentType documentType;
 	private String title;
 	private String description;
-	@CreationTimestamp
-	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(columnDefinition="DATETIME")
 	private Date sendedAtDate;
 	@Column(columnDefinition="DATETIME")
 	private Date acceptanceDate;
@@ -45,8 +46,15 @@ public class Document {
 	@JoinColumn(name = "accepter_id")
 	private Person accepter;
 	private String declinationReason;
-	@Lob
-	private File file;
+	@OneToMany(mappedBy = "document", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<PdfFile> pdfFiles;
+	@Enumerated(EnumType.STRING)
+	private State state;
+	
+	public Document() {
+		pdfFiles = new ArrayList<>();
+	}
 	
 	public Long getUniqueNumber() {
 		return uniqueNumber;
@@ -84,8 +92,8 @@ public class Document {
 		return declinationReason;
 	}
 	
-	public File getFile() {
-		return file;
+	public List<PdfFile> getPdfFiles() {
+		return pdfFiles;
 	}
 	
 	public void setAuthor(Person author) {
@@ -120,13 +128,59 @@ public class Document {
 		this.declinationReason = declinationReason;
 	}
 	
-	public void setFile(File file) {
-		this.file = file;
+	public void setPdfFiles(List<PdfFile> pdfFiles) {
+		this.pdfFiles = pdfFiles;
+	}
+	
+	public void addPdfFile(PdfFile pdfFile) {
+		pdfFiles.add(pdfFile);
 	}
 
 	public Date getSendedAtDate() {
 		return sendedAtDate;
 	}
 	
+	public State getState() {
+		return state;
+	}
 	
+	public void setAccepterStateAndDate(Person accepter, State state) {
+		if (accepter == null || state == State.SUKURTAS || state == State.PATEIKTAS) {
+			throw new IllegalArgumentException();
+		}
+		
+		nullifyAcceptanceAndDeclinationDate();
+		this.accepter = accepter;
+		this.state = state;
+		
+		if (state == State.PRIIMTAS) {
+			acceptanceDate = new Date(System.currentTimeMillis());
+		} else {
+			declinationDate = new Date(System.currentTimeMillis());
+		}
+	}
+	
+	public void nullifyAcceptanceAndDeclinationDate() {
+		acceptanceDate = null;
+		declinationDate = null;
+	}
+
+	public void setSendedAtDate(Date sendedAtDate) {
+		this.sendedAtDate = sendedAtDate;
+	}
+
+	public void setStateToPATEIKTAS() {
+		state = State.PATEIKTAS;
+		sendedAtDate = new Date(System.currentTimeMillis());
+	}
+	
+	public void setStateToSUKURTAS() {
+		state = State.SUKURTAS;
+	}
+	
+	public List<Long> getPdfFileIds() {
+		return pdfFiles.stream()
+		.map(f -> f.getId())
+		.collect(Collectors.toList());
+	}
 }
