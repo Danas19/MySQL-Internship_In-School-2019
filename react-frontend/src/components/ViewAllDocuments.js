@@ -12,7 +12,7 @@ class ViewAllDocuments extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/api/internship/documents/')
+        axios.get('http://localhost:8080/api/internship/documents')
         .then((result) => {
             this.setState({documents: result.data});
         });
@@ -34,12 +34,13 @@ class ViewAllDocuments extends Component {
                 <th>declinationDate</th>
                 <th>accepter</th>
                 <th>declinationReason</th>
-                <th>file</th>
+                <th>files</th>
               </tr>
               </thead>
               <tbody>
                 {this.state.documents.map(d =>
                   <tr key={d.uniqueNumber}>
+                      <td>{d.uniqueNumber}</td>
                   <td>{d.author}</td>
                   <td>{d.documentType}</td>
                   <td>{d.title}</td>
@@ -49,7 +50,7 @@ class ViewAllDocuments extends Component {
                   <td>{d.declinationDate}</td>
                   <td>{d.accepter}</td>
                   <td>{d.declinationReason}</td>
-                  <td>{d.file != null ? 'Pdf byla yra' : 'Nera file\'o'}</td>
+                  <td>{d.pdfFileIds !== null ? 'Pdf bylų skaičius: '+ d.pdfFileIds.length : 'Nera bylų'}</td>
                   </tr>
                   )}
                   

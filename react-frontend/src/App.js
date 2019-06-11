@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './components/CSS/style.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor() {
+        super();
+    }
+
+    onClick() {
+      axios.post(`http://localhost:8080/api/internship/testData/create`).
+      then((result) => {
+        console.log("Test data was added succesfully");
+      })
+    }
+
+    render() {
+        return (
+            <div className='container'>
+                <button onClick={this.onClick}>AddTestData</button>
+            </div>
+        );
+    }
 }
 
 export default App;

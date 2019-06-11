@@ -38,6 +38,11 @@ public class DocumentType {
 		documents = new HashSet<>();
 	}
 	
+	public DocumentType(String typeName) {
+		this();
+		this.typeName = typeName;
+	}
+	
 	public Long getId() {
 		return id;
 	}

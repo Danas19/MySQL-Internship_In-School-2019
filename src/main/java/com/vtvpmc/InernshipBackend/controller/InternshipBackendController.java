@@ -97,6 +97,12 @@ public class InternshipBackendController {
 		return ResponseEntity.ok().body(this.service.getUserGroup(userGroupId));
 	}
 	
+	@PostMapping("/testData/create")
+	public ResponseEntity createTestData() {
+		service.createTestData();
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/userGroups")
 	public ResponseEntity<UserGroup> addUserGroup(@RequestBody @Valid CreateUserGroupCommand createUserGroupCommand) {
 		return new ResponseEntity<UserGroup>(this.service.addUserGroup(createUserGroupCommand), HttpStatus.CREATED);

@@ -28,6 +28,11 @@ public class UserGroup {
 		us3rs = new HashSet<>();
 	}
 	
+	public UserGroup(String userGroupName) {
+		this();
+		this.userGroupName = userGroupName;
+	}
+	
 	public Long getId() {
 		return id;
 	}

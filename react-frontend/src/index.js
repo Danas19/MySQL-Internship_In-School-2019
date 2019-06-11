@@ -9,6 +9,7 @@ import ViewAllPersons from './components/ViewAllPersons';
 import AddUserGroup from './components/AddUserGroup';
 import ViewAllUserGroups from './components/ViewAllUserGroups';
 import AddUser from './components/AddUser';
+import AddDocumentType from './components/AddDocumentType';
 
 ReactDOM.render(
   <Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route exact path = "/userGroups" component={ViewAllUserGroups} />
         <Route exact path = "/userGroups/add" component={AddUserGroup} />
         <Route exact path = "/users/add" component={AddUser} />
+        <Route exact path = "/documentTypes/add" component={AddDocumentType} />
       </div>
   </Router>,
   document.getElementById('root')

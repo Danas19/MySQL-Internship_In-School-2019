@@ -28,7 +28,7 @@ class ViewAllPersons extends Component {
                 <th>firstName</th>
                 <th>lastName</th>
                 <th>admin</th>
-                <th>user</th>
+                <th>user groups</th>
               </tr>
               </thead>
               <tbody>
@@ -38,7 +38,7 @@ class ViewAllPersons extends Component {
                   <td>{p.firstName}</td>
                   <td>{p.lastName}</td>
                   <td>{p.admin != null ? "YES" : "NO"}</td>
-                  <td>{p.user != null ? p.user.groups.map(g => g.userGroupName) : "NO"}</td>
+                  <td>{p.user != null ? p.user.groups.map((g, index, array) => g.userGroupName+ (index !== array.length - 1 ? ',\n' : '')) : "NO"}</td>
                   </tr>
                   )}
                   

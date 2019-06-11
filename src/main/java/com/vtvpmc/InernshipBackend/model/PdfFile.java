@@ -25,6 +25,8 @@ public class PdfFile {
 	@ManyToOne
 	@JoinColumn(name = "document_id")
 	private Document document;
+	
+	public PdfFile() { }
 
 	public PdfFile(File file) {
 		super();

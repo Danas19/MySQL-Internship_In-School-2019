@@ -17,6 +17,7 @@ class AddDocument extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const { authorId, documentTypeId, title, description, files } = this.state;
+        console.log(files);
         axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description, files})
         .then((result) => {
             this.props.history.push('/');
@@ -31,12 +32,20 @@ class AddDocument extends Component {
 
     onChangeFiles = (e) => {
         let files = [];
+
         for (var i = 0; i < e.target.files.length; i++) {
-            files.push(e.target.files[i]);
+            let file = e.target.files[i];
+            if (file.name.endsWith('.pdf')) {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    files.push(e.target.result);
+                }
+            }
         }
-        console.log(fileURLS);
-        this.setState({files: fileURLS});
+        this.setState({files: files});
     }
+        
 
     render() {
         const { authorId, documentTypeId, title, description } = this.state;
