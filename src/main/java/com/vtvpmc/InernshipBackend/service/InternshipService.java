@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vtvpmc.InernshipBackend.TestData;
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.DocumentType;
@@ -40,6 +41,9 @@ public class InternshipService {
 	private PdfFileRepository pdfFileRepository;
 	
 	@Autowired
+	TestData testData;
+	
+	@Autowired
 	public InternshipService(DocumentRepository documentRepository, DocumentTypeRepository documentTypeRepository,
 			PersonRepository personRepository, UserRepository userRepository, UserGroupRepository userGroupRepository,
 			AdminRepository adminRepository, PdfFileRepository pdfFileRepository) {
@@ -54,29 +58,7 @@ public class InternshipService {
 	}
 
 	public void createTestData() {
-		this.documentTypeRepository.save(new DocumentType("Atostogu prasymai"));
-		this.documentTypeRepository.save(new DocumentType("Svarbiausi"));
-		
-		UserGroup newUserGroup1 = new UserGroup("Administracija");
-		UserGroup newUserGroup2 = new UserGroup("Mokytojai");
-		UserGroup newUserGroup3 = new UserGroup("Kiti");
-		this.userGroupRepository.save(newUserGroup1);
-		this.userGroupRepository.save(newUserGroup2);
-		this.userGroupRepository.save(newUserGroup3);
-		
-		Person newPerson = new Person("Vytautas", "Petrauskas");
-		User newUser = new User();
-		
-		newUser.setPerson(newPerson);
-		newPerson.setUser(newUser);
-		
-		newUser.addGroup(newUserGroup2);
-		newUserGroup2.addUser(newUser);
-		newUser.addGroup(newUserGroup3);
-		newUserGroup3.addUser(newUser);
-		
-		this.personRepository.save(newPerson);
-		this.userRepository.save(newUser);
+		testData.createTestData();
 	}
 
 	public List<Document> getDocuments() {

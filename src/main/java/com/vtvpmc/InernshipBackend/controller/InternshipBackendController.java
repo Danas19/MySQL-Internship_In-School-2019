@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vtvpmc.InernshipBackend.TestData;
 import com.vtvpmc.InernshipBackend.model.Admin;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.DocumentType;
@@ -40,6 +41,8 @@ import com.vtvpmc.InernshipBackend.service.InternshipService;
 public class InternshipBackendController {
 	@Autowired
 	private InternshipService service;
+	@Autowired
+	TestData testData;
 	
 	@GetMapping("/documents")
 	public ResponseEntity<List<Document>> getDocuments() {

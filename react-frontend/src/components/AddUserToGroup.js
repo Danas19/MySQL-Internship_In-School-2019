@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { throwStatement } from '@babel/types';
 
 class AddUserToGroup extends Component {
     constructor() {
@@ -14,8 +15,8 @@ class AddUserToGroup extends Component {
     componentDidMount() {
         axios.get('http://localhost:8080/api/internship/userGroups')
         .then((result) => {
-            this.setState({userGroups: result.data});
-        })
+            this.setState({userGroups: result.data}, function() {this.showUsersNotInGroup()})
+        });
     }
 
     onSubmit = (e) => {
@@ -29,13 +30,17 @@ class AddUserToGroup extends Component {
         });
     }
 
-    onGroupChange = (e) => {
+    showUsersNotInGroup() {
         var userGroupName = document.getElementById('select-user-group').value;
         var userGroupId = this.state.userGroups.filter(u => u.userGroupName === userGroupName)[0].id;
         axios.get('http://localhost:8080/api/internship/userGroups/'+ userGroupId+ '/not/users')
         .then((response) => {
             this.setState({users: response.data});
         });
+    }
+
+    onGroupChange = (e) => {
+        this.showUsersNotInGroup();
     }
 
     render() {
