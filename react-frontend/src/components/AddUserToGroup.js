@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { thisTypeAnnotation } from '@babel/types';
 
 class AddUserToGroup extends Component {
     constructor() {
@@ -15,7 +14,7 @@ class AddUserToGroup extends Component {
     componentDidMount() {
         axios.get('http://localhost:8080/api/internship/userGroups')
         .then((result) => {
-            this.setState({userGroups: result.data})
+            this.setState({userGroups: result.data});
         })
     }
 
@@ -30,14 +29,10 @@ class AddUserToGroup extends Component {
         });
     }
 
-    onChange = (e) => {
-        const state = this.state;
-        state[e.target.name] = e.target.value;
-        this.setState(state);
-    }
-
     onGroupChange = (e) => {
-        axios.get('http://localhost:8080/api/internship/userGroups/{userGroupId}/not/users')
+        var userGroupName = document.getElementById('select-user-group').value;
+        var userGroupId = this.state.userGroups.filter(u => u.userGroupName === userGroupName)[0].id;
+        axios.get('http://localhost:8080/api/internship/userGroups/'+ userGroupId+ '/not/users')
         .then((response) => {
             this.setState({users: response.data});
         });
@@ -49,24 +44,25 @@ class AddUserToGroup extends Component {
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
                     <label>Vartotojų grupės pasirinkimas: </label>
-                    <select onChange={this.onGroupChange}>
+                    <select id="select-user-group" onChange={this.onGroupChange}>
                         {userGroups.map(u => 
                         <option id={u.id}>{u.userGroupName}</option>
                             )}
                     </select>
 
+                    <br></br>
                     <label>Vartotojo pasirinkimas: </label>
                     <table>
                         <tbody>
                             {users.map(u => 
                                 <tr>
-                                    <td>{u.firstName + u.lastName}</td>
+                                    <td>{u.personFirstAndLastName}</td>
                                 </tr>
                                 )}
                         </tbody>
                     </table>
 
-                    <button>Pridėti šį vartotoją į grupę</button>
+                    <button>Pridėti šiuos vartotojus į grupę</button>
                 </form>
             </div>
         );

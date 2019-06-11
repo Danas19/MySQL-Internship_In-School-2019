@@ -58,5 +58,7 @@ public class User {
 		this.gr0ups.add(group);
 	}
 	
-	
+	public String getPersonFirstAndLastName() {
+		return person.getLastName() + " " + person.getFirstName();
+	}
 }
