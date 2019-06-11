@@ -24,17 +24,17 @@ class ViewAllDocuments extends Component {
                 <table>
               <thead>
               <tr>
-                <th>uniqueNumber</th>
-                <th>author</th>
-                <th>documentType</th>
-                <th>title</th>
-                <th>description</th>
-                <th>sendedAtDate</th>
-                <th>acceptanceDate</th>
-                <th>declinationDate</th>
-                <th>accepter</th>
-                <th>declinationReason</th>
-                <th>files</th>
+                <th>Unikalus numeris</th>
+                <th>Autorius</th>
+                <th>Dokumento rūšis</th>
+                <th>Pavadinimas</th>
+                <th>Aprašas</th>
+                <th>Išsiuntimo data</th>
+                <th>Priėmimo data</th>
+                <th>atemtimo data</th>
+                <th>priėmėjas/atmetėjas</th>
+                <th>atemtimo priežastis</th>
+                <th>bylos</th>
               </tr>
               </thead>
               <tbody>

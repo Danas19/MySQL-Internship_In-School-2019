@@ -30,10 +30,10 @@ class AddUserGroup extends Component {
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
-                    <label>userGroupName: </label>
+                    <label>Vartotojo grupės pavadinimas: </label>
                     <input name='userGroupName' value={userGroupName} onChange={this.onChange}></input>
 
-                    <button>Add New User Group</button>
+                    <button>Pridėti naują vartotojo grupę</button>
                 </form>
             </div>
         );

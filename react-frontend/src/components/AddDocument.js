@@ -64,21 +64,22 @@ class AddDocument extends Component {
                     <label>Author Id: </label>
                     <input name='authorId' value={authorId} onChange={this.onChangeInput}></input>
 
+                    <label>Dokumento rūšis: </label>
                     <select>
                         {documentTypes.map(d => 
                         <option id={d.id}>{d.typeName}</option>
                             )}
                     </select>
 
-                    <label>Title: </label>
+                    <label>Pavadinimas: </label>
                     <input name='title' value={title} onChange={this.onChangeInput}></input>
 
-                    <label>Description: </label>
+                    <label>Aprašas: </label>
                     <input name='description' value={description} onChange={this.onChangeInput}></input>
 
                     <input type='file' accept=".pdf" multiple onChange={this.onChangeFiles}></input>
 
-                    <button>Add Document</button>
+                    <button>Pridėti dokumentą</button>
                 </form>
             </div>
         );

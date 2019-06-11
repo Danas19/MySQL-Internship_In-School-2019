@@ -42,20 +42,20 @@ class AddUser extends Component {
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
-                    <label>firstName: </label>
+                    <label>Vardas: </label>
                     <input name='firstName' value={firstName} onChange={this.onChange}></input>
 
-                    <label>lastName: </label>
+                    <label>Pavardė: </label>
                     <input name='lastName' value={lastName} onChange={this.onChange}></input>
 
-                    <label>Choose user group</label>
+                    <label>Pasirinkti vartotojų grupę</label>
                     <select>
                         {this.state.userGroups.map(u => 
                         <option id={u.id}>{u.userGroupName}</option>
                             )}
                     </select>
 
-                    <button>Add New Person Who is User</button>
+                    <button>Pridėti naują asmenį, kuris bus vartotojas</button>
                 </form>
             </div>
         );

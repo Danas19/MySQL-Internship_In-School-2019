@@ -23,8 +23,8 @@ class ViewAllUserGroups extends Component {
                 <table>
               <thead>
               <tr>
-                <th>id</th>
-                <th>userGroupName</th>
+                <th>Ud</th>
+                <th>Vartotojo grupės pavadinimas</th>
               </tr>
               </thead>
               <tbody>

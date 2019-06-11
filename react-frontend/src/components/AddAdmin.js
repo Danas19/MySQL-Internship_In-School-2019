@@ -31,13 +31,13 @@ class AddAdmin extends Component {
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
-                    <label>firstName: </label>
+                    <label>Vardas: </label>
                     <input name='firstName' value={firstName} onChange={this.onChange}></input>
 
-                    <label>lastName: </label>
+                    <label>Pavardė: </label>
                     <input name='lastName' value={lastName} onChange={this.onChange}></input>
 
-                    <button>Add New Person Who is Admin</button>
+                    <button>Pridėti naują žmogų, kuris bus adminas</button>
                 </form>
             </div>
         );

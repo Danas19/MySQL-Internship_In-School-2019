@@ -30,10 +30,10 @@ class AddDocumentType extends Component {
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
-                    <label>typeName: </label>
+                    <label>Dokumento tipo pavadinimas: </label>
                     <input name='typeName' value={typeName} onChange={this.onChange}></input>
 
-                    <button>Add New Document Type</button>
+                    <button>Pridėti naują dokumneto tipą</button>
                 </form>
             </div>
         );

@@ -24,11 +24,11 @@ class ViewAllPersons extends Component {
                 <table>
               <thead>
               <tr>
-                <th>id</th>
-                <th>firstName</th>
-                <th>lastName</th>
-                <th>admin</th>
-                <th>user groups</th>
+                <th>Id</th>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th>Adminas?</th>
+                <th>Vartotojas? Jo grupės</th>
               </tr>
               </thead>
               <tbody>
