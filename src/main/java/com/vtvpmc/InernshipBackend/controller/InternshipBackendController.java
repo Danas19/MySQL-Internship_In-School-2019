@@ -82,6 +82,11 @@ public class InternshipBackendController {
 		return ResponseEntity.ok().body(this.service.getUser(userId));
 	}
 	
+	@GetMapping("/userGroups/{userGroupId}/not/users")
+	public ResponseEntity<List<User>> getUsersNotBelongingToGroup(@PathVariable Long userGroupId) {
+		return ResponseEntity.ok().body(this.service.getUsersNotBelongingToGroup(userGroupId));
+	}
+	
 	@GetMapping("/documents/{documentId}")
 	public ResponseEntity<Document> getDocument(@PathVariable Long documentId) {
 		return ResponseEntity.ok().body(this.service.getDocument(documentId));
@@ -112,6 +117,12 @@ public class InternshipBackendController {
 	public ResponseEntity<User> addUser(@RequestBody @Valid CreateUserCommand createUserCommand,
 				@PathVariable Long userGroupId) {
 		return new ResponseEntity<User>(this.service.addUser(createUserCommand, userGroupId), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/users/{userId}/{userGroupId}")
+	public ResponseEntity<User> addUserToGroup(@PathVariable Long userId,
+				@PathVariable Long userGroupId) {
+		return new ResponseEntity<User>(this.service.addUserToGroup(userId, userGroupId), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/admins")

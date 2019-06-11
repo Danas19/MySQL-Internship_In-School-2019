@@ -3,6 +3,7 @@ package com.vtvpmc.InernshipBackend.service;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,21 @@ public class InternshipService {
 		return this.userRepository.findAll();
 	}
 	
+	public List<User> getUsersNotBelongingToGroup(Long userGroupId) {
+		return userRepository.findAll().stream()
+		.filter(u -> !isUserInGroup(u, userGroupId))
+		.collect(Collectors.toList());
+	}
+	
+	private boolean isUserInGroup(User user, Long userGroupId) {
+		for (UserGroup userGroup : user.getGroups()) {
+			if (userGroup.getId().equals(userGroupId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List<UserGroup> getUserGroups() {
 		return this.userGroupRepository.findAll();
 	}
@@ -154,7 +170,9 @@ public class InternshipService {
 	
 	public User addUser(CreateUserCommand createUserCommand, Long userGroupId) {
 		User newUser = new User();
-		newUser.addGroup(userGroupRepository.findById(userGroupId).orElse(null));
+		UserGroup oldUserGroup = userGroupRepository.findById(userGroupId).orElse(null);
+		newUser.addGroup(oldUserGroup);
+		oldUserGroup.addUser(newUser);
 		
 		Person newPerson = new Person(createUserCommand.getFirstName(),
 		createUserCommand.getLastName());
@@ -164,6 +182,16 @@ public class InternshipService {
 		
 		personRepository.save(newPerson);
 		return userRepository.save(newUser);
+	}
+	
+	public User addUserToGroup(Long userId, Long userGroupId) {
+		User oldUser = userRepository.findById(userId).orElse(null);
+		UserGroup oldUserGroup = userGroupRepository.findById(userGroupId).orElse(null);
+		oldUser.addGroup(oldUserGroup);
+		oldUserGroup.addUser(oldUser);
+		
+		userGroupRepository.save(oldUserGroup);
+		return userRepository.save(oldUser);
 	}
 	
 	public UserGroup addUserGroup(CreateUserGroupCommand createUserGroupCommand) {

@@ -10,6 +10,7 @@ import AddUserGroup from './components/AddUserGroup';
 import ViewAllUserGroups from './components/ViewAllUserGroups';
 import AddUser from './components/AddUser';
 import AddDocumentType from './components/AddDocumentType';
+import AddUserToGroup from './components/AddUserToGroup';
 
 ReactDOM.render(
   <Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route exact path = "/admins/add" component={AddAdmin} />
         <Route exact path = "/userGroups" component={ViewAllUserGroups} />
         <Route exact path = "/userGroups/add" component={AddUserGroup} />
+        <Route exact path = "/userGroups/addUser" component={AddUserToGroup} />
         <Route exact path = "/users/add" component={AddUser} />
         <Route exact path = "/documentTypes/add" component={AddDocumentType} />
       </div>
