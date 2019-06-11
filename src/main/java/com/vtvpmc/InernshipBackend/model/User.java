@@ -61,4 +61,16 @@ public class User {
 	public String getPersonFirstAndLastName() {
 		return person.getLastName() + " " + person.getFirstName();
 	}
+	
+	public String getFirstName() {
+		return person.getFirstName();
+	}
+	
+	public String getLastName() {
+		return person.getLastName();
+	}
+	
+	public Long getPersonId() {
+		return person.getId();
+	}
 }
