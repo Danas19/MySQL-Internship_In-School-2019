@@ -183,4 +183,8 @@ public class Document {
 		.map(f -> f.getId())
 		.collect(Collectors.toList());
 	}
+	
+	public String getDocumentTypeName() {
+		return documentType.getTypeName();
+	}
 }

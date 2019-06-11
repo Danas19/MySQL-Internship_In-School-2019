@@ -7,16 +7,25 @@ class AddDocument extends Component {
         super();
         this.state = {
             authorId: '',
-            documentTypeId: '',
             title: '',
             description: '',
-            files: []
+            files: [],
+            documentTypes: []
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/api/internship/documentTypes')
+        .then((result) => {
+            this.setState({documentTypes: result.data})
+        })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { authorId, documentTypeId, title, description, files } = this.state;
+        const { authorId, title, description, files } = this.state;
+         const documentTypeName = document.querySelector('select').value;
+         const documentTypeId = this.state.documentTypes.filter(d => d.typeName === documentTypeName)[0].id;
         console.log(files);
         axios.post('http://localhost:8080/api/internship/documents/'+documentTypeId+'/'+authorId, {title, description, files})
         .then((result) => {
@@ -48,15 +57,18 @@ class AddDocument extends Component {
         
 
     render() {
-        const { authorId, documentTypeId, title, description } = this.state;
+        const { authorId, title, description, documentTypes } = this.state;
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
                     <label>Author Id: </label>
                     <input name='authorId' value={authorId} onChange={this.onChangeInput}></input>
 
-                    <label>Document Type Id: </label>
-                    <input name='documentTypeId' value={documentTypeId} onChange={this.onChangeInput}></input>
+                    <select>
+                        {documentTypes.map(d => 
+                        <option id={d.id}>{d.typeName}</option>
+                            )}
+                    </select>
 
                     <label>Title: </label>
                     <input name='title' value={title} onChange={this.onChangeInput}></input>

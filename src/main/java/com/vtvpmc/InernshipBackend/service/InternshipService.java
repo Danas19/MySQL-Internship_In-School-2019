@@ -146,7 +146,7 @@ public class InternshipService {
 				pdfFile.setDocument(newDocument);
 				pdfFileRepository.save(pdfFile);
 			}
-			createDocumentCommand.getFiles().forEach(System.out::println);
+			//createDocumentCommand.getFiles().forEach(System.out::println);
 		}
 		
 		return this.documentRepository.save(newDocument);

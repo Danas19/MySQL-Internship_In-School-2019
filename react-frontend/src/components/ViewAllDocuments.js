@@ -42,7 +42,7 @@ class ViewAllDocuments extends Component {
                   <tr key={d.uniqueNumber}>
                       <td>{d.uniqueNumber}</td>
                   <td>{d.author}</td>
-                  <td>{d.documentType}</td>
+                  <td>{d.documentTypeName}</td>
                   <td>{d.title}</td>
                   <td>{d.description}</td>
                   <td>{d.sendedAtDate}</td>
