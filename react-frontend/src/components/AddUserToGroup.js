@@ -28,32 +28,26 @@ class AddUserToGroup extends Component {
         let currentUserGroupName = document.querySelector('select').value;
         let currentUserGroupId = this.state.userGroups.filter(u => u.userGroupName == currentUserGroupName)[0].id;
         let usersSelected = this.state.usersSelected;
-        let usersSelectedJSON = JSON.stringify(usersSelected);
-        
-        fetch('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(usersSelected)
-          })
+        let usersSelectedWrapper = {'users': usersSelected};
 
-        // axios.post('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {usersSelectedJSON})
-        // .then((result) => {
-        //     console.log(result.data);
-        //     this.props.history.push('/');
-        // })
+        axios.post('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {usersSelectedWrapper})
+        .then((result) => {
+            console.log(result.data);
+            this.props.history.push('/');
+        })
     }
 
     showUsersNotInGroup() {
-        var userGroupName = document.getElementById('select-user-group').value;
-        var userGroupId = this.state.userGroups.filter(u => u.userGroupName === userGroupName)[0].id;
-        axios.get('http://localhost:8080/api/internship/userGroups/'+ userGroupId+ '/not/users')
-        .then((response) => {
+        if (this.state.userGroups.length != 0) {
+            var userGroupName = document.getElementById('select-user-group').value;
+            var userGroupId = this.state.userGroups.filter(u => u.userGroupName === userGroupName)[0].id;
+            axios.get('http://localhost:8080/api/internship/userGroups/'+ userGroupId+ '/not/users')
+            .then((response) => {
             this.setState({users: response.data});
             this.setState({usersShown: response.data});
-        });
+            });
+        }
+        
     }
 
     onGroupChange = (e) => {
@@ -75,7 +69,7 @@ class AddUserToGroup extends Component {
     }
 
     onClickShownUser = (e) => {
-        let userIndex = this.state.usersShown.findIndex(u => u.id == e.target.id);
+        let userIndex = this.state.usersShown.slice(0, 15).findIndex(u => u.id == e.target.id);
 
         let usersSelected = this.state.usersSelected;
         usersSelected.push(this.state.usersShown[userIndex]);
