@@ -22,7 +22,7 @@ ReactDOM.render(
         <Route exact path = "/admins/add" component={AddAdmin} />
         <Route exact path = "/userGroups" component={ViewAllUserGroups} />
         <Route exact path = "/userGroups/add" component={AddUserGroup} />
-        <Route exact path = "/userGroups/addUser" component={AddUserToGroup} />
+        <Route exact path = "/userGroups/addUsers" component={AddUserToGroup} />
         <Route exact path = "/users/add" component={AddUser} />
         <Route exact path = "/documentTypes/add" component={AddDocumentType} />
       </div>

@@ -30,6 +30,8 @@ class AddUserToGroup extends Component {
         let usersSelected = this.state.usersSelected;
         let usersSelectedWrapper = {'users': usersSelected};
 
+        console.log(usersSelectedWrapper);
+
         axios.post('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {usersSelectedWrapper})
         .then((result) => {
             console.log(result.data);
