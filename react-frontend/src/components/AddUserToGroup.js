@@ -38,6 +38,7 @@ class AddUserToGroup extends Component {
     }
 
     onGroupChange = (e) => {
+        this.setState({usersSelected: []});
         this.showUsersNotInGroup();
     }
 
@@ -55,8 +56,8 @@ class AddUserToGroup extends Component {
     }
 
     onClickShownUser = (e) => {
-        let userIndex = this.state.usersShown.findIndex(u => u.id = e.target.id);
-
+        let userIndex = this.state.usersShown.findIndex(u => u.id == e.target.id);
+        
         let usersSelected = this.state.usersSelected;
         usersSelected.push(this.state.usersShown[userIndex]);
 
@@ -86,8 +87,8 @@ class AddUserToGroup extends Component {
                     <table>
                         <tbody>
                             {usersShown.map(u => 
-                                <tr onClick={this.onClickShownUser}>
-                                    <td id={u.id}>{u.personFirstAndLastName}</td>
+                                <tr>
+                                    <td id={u.id} onClick={this.onClickShownUser}>{u.personFirstAndLastName}</td>
                                 </tr>
                                 )}
                         </tbody>
