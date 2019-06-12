@@ -176,6 +176,13 @@ public class InternshipService {
 		return userRepository.save(oldUser);
 	}
 	
+	public List<User> addUsersToGroup(List<User> users, Long userGroupId) {
+		for (User temporary : users) {
+			addUserToGroup(temporary.getId(), userGroupId);
+		}
+		return users;
+	}
+	
 	public UserGroup addUserGroup(CreateUserGroupCommand createUserGroupCommand) {
 		UserGroup newUserGroup = new UserGroup();
 		newUserGroup.setUserGroupName(createUserGroupCommand.getUserGroupName());

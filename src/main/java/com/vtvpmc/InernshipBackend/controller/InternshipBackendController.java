@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vtvpmc.InernshipBackend.TestData;
 import com.vtvpmc.InernshipBackend.model.Admin;
+import com.vtvpmc.InernshipBackend.model.CreateCommandUserListWrapper;
 import com.vtvpmc.InernshipBackend.model.Document;
 import com.vtvpmc.InernshipBackend.model.DocumentType;
 import com.vtvpmc.InernshipBackend.model.Person;
@@ -126,6 +127,13 @@ public class InternshipBackendController {
 	public ResponseEntity<User> addUserToGroup(@PathVariable Long userId,
 				@PathVariable Long userGroupId) {
 		return new ResponseEntity<User>(this.service.addUserToGroup(userId, userGroupId), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/addMultipleUsersToGroup/{userGroupId}")
+	public ResponseEntity<List<User>> addUsersToGroup(@RequestBody CreateCommandUserListWrapper createCommandUserListWrapper,
+					@PathVariable Long userGroupId) {
+		return new ResponseEntity<List<User>>(this.service.addUsersToGroup(createCommandUserListWrapper.getUsers(), userGroupId),
+						HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/admins")

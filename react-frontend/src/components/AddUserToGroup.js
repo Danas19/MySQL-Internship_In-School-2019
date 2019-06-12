@@ -24,7 +24,26 @@ class AddUserToGroup extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+
+        let currentUserGroupName = document.querySelector('select').value;
+        let currentUserGroupId = this.state.userGroups.filter(u => u.userGroupName == currentUserGroupName)[0].id;
+        let usersSelected = this.state.usersSelected;
+        let usersSelectedJSON = JSON.stringify(usersSelected);
         
+        fetch('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(usersSelected)
+          })
+
+        // axios.post('http://localhost:8080/api/internship/addMultipleUsersToGroup/'+ currentUserGroupId, {usersSelectedJSON})
+        // .then((result) => {
+        //     console.log(result.data);
+        //     this.props.history.push('/');
+        // })
     }
 
     showUsersNotInGroup() {
