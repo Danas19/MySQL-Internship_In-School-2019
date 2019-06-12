@@ -57,7 +57,7 @@ class AddUserToGroup extends Component {
 
     onClickShownUser = (e) => {
         let userIndex = this.state.usersShown.findIndex(u => u.id == e.target.id);
-        
+
         let usersSelected = this.state.usersSelected;
         usersSelected.push(this.state.usersShown[userIndex]);
 
@@ -86,7 +86,7 @@ class AddUserToGroup extends Component {
                     <input name='search-users-input' value={searchUsersInputValue} onChange={this.onChangeSearchUsersInput}></input>
                     <table>
                         <tbody>
-                            {usersShown.map(u => 
+                            {usersShown.slice(0, 15).map(u => 
                                 <tr>
                                     <td id={u.id} onClick={this.onClickShownUser}>{u.personFirstAndLastName}</td>
                                 </tr>
