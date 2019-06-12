@@ -8,7 +8,9 @@ class AddUserToGroup extends Component {
         super();
         this.state = {
             userGroups: [],
-            users: []
+            users: [],
+            usersShown: [],
+            searchUsersInputValue: ''
         }
     }
 
@@ -21,13 +23,7 @@ class AddUserToGroup extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { firstName, lastName } = this.state;
-        const userGroupName = document.querySelector('select').value;
-        const userGroupId = this.state.userGroups.filter(u => u.userGroupName === userGroupName)[0].id;
-        axios.post('http://localhost:8080/api/internship/users/'+ userGroupId, {firstName, lastName})
-        .then((result) => {
-            this.props.history.push('/');
-        });
+        
     }
 
     showUsersNotInGroup() {
@@ -36,6 +32,7 @@ class AddUserToGroup extends Component {
         axios.get('http://localhost:8080/api/internship/userGroups/'+ userGroupId+ '/not/users')
         .then((response) => {
             this.setState({users: response.data});
+            this.setState({usersShown: response.data});
         });
     }
 
@@ -43,8 +40,15 @@ class AddUserToGroup extends Component {
         this.showUsersNotInGroup();
     }
 
+    onChangeSearchUsersInput = (e) => {
+        let inputedValueLowerCase = e.target.value.toLowerCase();
+        let usersShown = this.state.users.filter(u => u.personFirstAndLastName.toLowerCase().startsWith(inputedValueLowerCase));
+        this.setState({usersShown: usersShown});
+        this.setState({searchUsersInputValue: inputedValueLowerCase.toUpperCase()});
+    }
+
     render() {
-        const { userGroups, users } = this.state;
+        const { userGroups, usersShown, searchUsersInputValue } = this.state;
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
@@ -56,12 +60,13 @@ class AddUserToGroup extends Component {
                     </select>
 
                     <br></br>
-                    <label>Vartotojo pasirinkimas: </label>
+                    <label>Vartotojo pasirinkimas(enter last and first names to filter): </label>
+                    <input name='search-users-input' value={searchUsersInputValue} onChange={this.onChangeSearchUsersInput}></input>
                     <table>
                         <tbody>
-                            {users.map(u => 
+                            {usersShown.map(u => 
                                 <tr>
-                                    <td>{u.personFirstAndLastName}</td>
+                                    <td id={u.id}>{u.personFirstAndLastName}</td>
                                 </tr>
                                 )}
                         </tbody>
