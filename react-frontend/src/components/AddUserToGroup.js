@@ -69,8 +69,22 @@ class AddUserToGroup extends Component {
         
     }
 
+    onClickSelectedUser = (e) => {
+        let userIndex = this.state.usersSelected.findIndex(u => u.id == e.target.id);
+        console.log(userIndex);
+
+        let usersShown = this.state.usersShown;
+        usersShown.push(this.state.usersSelected[userIndex]);
+
+        let usersSelected = [...this.state.usersSelected.slice(0, userIndex), 
+            ...this.state.usersSelected.slice(userIndex + 1)];
+
+        this.setState({usersSelected: usersSelected});
+        this.setState({usersShown: usersShown});
+    }
+
     render() {
-        const { userGroups, usersShown, searchUsersInputValue } = this.state;
+        const { userGroups, usersShown, searchUsersInputValue, usersSelected } = this.state;
         return (
             <div className='container'>
                 <form onSubmit={this.onSubmit}>
@@ -85,10 +99,30 @@ class AddUserToGroup extends Component {
                     <label>Vartotojo pasirinkimas(vedant pavardę ir vardą, turėtų prafiltruot): </label>
                     <input name='search-users-input' value={searchUsersInputValue} onChange={this.onChangeSearchUsersInput}></input>
                     <table>
+                    <thead>
+                            <tr>
+                                <th>Vartotojų, iš kurių galima pasirinkti, sąrašas</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {usersShown.slice(0, 15).map(u => 
                                 <tr>
                                     <td id={u.id} onClick={this.onClickShownUser}>{u.personFirstAndLastName}</td>
+                                </tr>
+                                )}
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pasirinkti vartotojai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {usersSelected.map(u => 
+                                <tr>
+                                    <td id={u.id} onClick={this.onClickSelectedUser}>{u.personFirstAndLastName}</td>
                                 </tr>
                                 )}
                         </tbody>
