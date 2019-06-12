@@ -10,6 +10,7 @@ class AddUserToGroup extends Component {
             userGroups: [],
             users: [],
             usersShown: [],
+            usersSelected: [],
             searchUsersInputValue: ''
         }
     }
@@ -42,9 +43,29 @@ class AddUserToGroup extends Component {
 
     onChangeSearchUsersInput = (e) => {
         let inputedValueLowerCase = e.target.value.toLowerCase();
-        let usersShown = this.state.users.filter(u => u.personFirstAndLastName.toLowerCase().startsWith(inputedValueLowerCase));
+        let usersShown = this.state.users.filter(u => u.personFirstAndLastName.toLowerCase().startsWith(inputedValueLowerCase) && !this.isUserSelected(u));
         this.setState({usersShown: usersShown});
         this.setState({searchUsersInputValue: inputedValueLowerCase.toUpperCase()});
+    }
+
+    isUserSelected(user) {
+        let userIsSelected = false;
+        this.state.usersSelected.forEach(u => u === user ? userIsSelected = true : userIsSelected = userIsSelected);
+        return userIsSelected;
+    }
+
+    onClickShownUser = (e) => {
+        let userIndex = this.state.usersShown.findIndex(u => u.id = e.target.id);
+
+        let usersSelected = this.state.usersSelected;
+        usersSelected.push(this.state.usersShown[userIndex]);
+
+        let usersShown = [...this.state.usersShown.slice(0, userIndex),
+             ...this.state.usersShown.slice(userIndex + 1)];
+
+        this.setState({usersSelected: usersSelected});
+        this.setState({usersShown: usersShown});
+        
     }
 
     render() {
@@ -65,7 +86,7 @@ class AddUserToGroup extends Component {
                     <table>
                         <tbody>
                             {usersShown.map(u => 
-                                <tr>
+                                <tr onClick={this.onClickShownUser}>
                                     <td id={u.id}>{u.personFirstAndLastName}</td>
                                 </tr>
                                 )}
