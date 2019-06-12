@@ -60,7 +60,7 @@ class AddUserToGroup extends Component {
                     </select>
 
                     <br></br>
-                    <label>Vartotojo pasirinkimas(enter last and first names to filter): </label>
+                    <label>Vartotojo pasirinkimas(vedant pavardę ir vardą, turėtų prafiltruot): </label>
                     <input name='search-users-input' value={searchUsersInputValue} onChange={this.onChangeSearchUsersInput}></input>
                     <table>
                         <tbody>
